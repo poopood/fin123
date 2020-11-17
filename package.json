@@ -8,8 +8,30 @@
     "start": "next start"
   },
   "dependencies": {
+    "cookie": "^0.4.1",
+    "currency-converter-lt": "^1.0.0",
+    "firebase": "^7.23.0",
+    "isomorphic-unfetch": "^3.1.0",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.0.0",
+    "moment": "^2.29.1",
     "next": "9.5.3",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+    "next-cookies": "^2.0.3",
+    "next-redux-wrapper": "^6.0.2",
+    "react": "^16.13.1",
+    "react-datepicker": "^3.3.0",
+    "react-dates": "^21.8.0",
+    "react-dom": "16.13.1",
+    "react-hook-form": "^6.9.0",
+    "react-number-format": "^4.4.1",
+    "react-redux": "^7.2.1",
+    "react-select": "^3.1.0",
+    "redux": "^4.0.5",
+    "redux-localstorage-simple": "^2.3.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {}
 }

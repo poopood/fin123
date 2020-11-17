@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import {wrapper} from '../src/store/configureStore';
+import '../styles/globals.css';
+// import "react-datepicker/dist/react-datepicker.css";
+import 'react-dates/lib/css/_datepicker.css';
+
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp);
+
