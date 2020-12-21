@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 // import MyApp from '../src/components/MyApp';
 import Link from 'next/link';
-import AddTransactionForm from '../src/components/AddTransactionForm'
+// import AddTransactionForm from '../src/components/AddTransactionForm'
 // import MyApp from '../src/components/MyApp';
 import Transactions from '../src/components/Transactions';
 import { connect } from 'react-redux';
@@ -14,10 +14,15 @@ import Cookies from 'js-cookie';
 import {LogoutUser} from '../src/actions/UserActions';
 import jwt from 'jsonwebtoken'; 
 import cookie from 'cookie';
+import moment from 'moment';
 
 
 const Index = (props) => {
   console.log(props, 'props')
+  let currentMonth = moment(new Date()).format('MMMM');
+    let currentYear= moment(new Date()).format('Y');
+    console.log(currentMonth, 'currentMonth');
+    console.log(currentYear, 'currentYear');
   // console.log(Date.now(), 'datae')
   const TList = props.transactions;
   // const uState = props.userState;
@@ -37,7 +42,7 @@ const Index = (props) => {
   return (
     <div>
         <h2>Hi</h2>
-        <Transactions TList={TList}  />
+
         
         <Link href="/add-transaction">
           <a>Add Transaction</a>
@@ -47,8 +52,21 @@ const Index = (props) => {
           <a>Add Account</a>
         </Link>
         <br/>
+        <Link href="/accounts">
+          <a>Accounts</a>
+        </Link>
+        <br/>
         <Link href="/login">
           <a>Log In</a>
+        </Link>
+        <br/><br/>
+        <Link href="/transactions">
+          <a>Transactions</a>
+        </Link>
+        <br/>
+        <br/>
+        <Link href={`/budget/${currentYear}/${currentMonth}`}>
+          <a>Budgeting</a>
         </Link>
         <button onClick={LogoutUser}>Log Out</button>
         

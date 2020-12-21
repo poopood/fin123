@@ -40,9 +40,18 @@ export const groupedOptions = [
     {
       label: 'Liabilities',
       options: liabilityOptions,
-    },
-    {'label':<Link href={`/add-account`}>
-    <a>Add Account</a>
-</Link>,isDisabled: true}
+    }
     
   ];
+
+
+  export const categoryOptions = [
+    { value: "entertainment", label: "#Entertainment"},
+    { value: "food", label: "#Food"},
+    { value: "rent", label: "#Rent"}
+  ]
+  export const categoryOptions2 = [
+    { value: "entertainment", label: "fvfv"},
+    { value: "33", label: "33"},
+    { value: "rent", label: "33"}
+  ]

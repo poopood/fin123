@@ -33,6 +33,7 @@ const SignUp = (props) => {
 
                 const defaultAccount1 = {name : `${name}'s Cash`, currentAmount : 0, account_cat : "Assets", account_type : "Wallet", currency : "USD"}
                 const defaultAccount2 = {name : `${name}'s Credit Card`, currentAmount : 0, account_cat : "Liabilities", account_type : "Credit Card", currency : "USD"}
+                const defaultCategory = {value:'other', label:'Other'};
                 // props.dispatch(startAddAccount({
                 //     name: defaultAccount1.name,
                 //     currentAmount: defaultAccount1.currentAmount,
@@ -44,14 +45,17 @@ const SignUp = (props) => {
                 
             db.ref(`users/${uid}/accounts`).push(defaultAccount1)
             .then(() => {
+                
                 db.ref(`users/${uid}/accounts`).push(defaultAccount2)
+                db.ref(`users/${uid}/categories/expense`).push(defaultCategory)
+                db.ref(`users/${uid}/categories/income`).push(defaultCategory)
                 .then(() => {
                     setMessage('thank you');
                     props.dispatch(startSignInUser(params))
                 })
                 
             })
-            
+           
 
                
                   
