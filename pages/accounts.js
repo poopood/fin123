@@ -4,7 +4,7 @@ import db from '../src/firebase/firebase';
 import jwt from 'jsonwebtoken';
 import {auth} from '../src/firebase/firebase';
 import cookie from 'cookie';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux';  
 import NumberFormat from "react-number-format";
 
 const Accounts = (props) => {

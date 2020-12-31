@@ -31,11 +31,12 @@ const AddAccountForm = (props) => {
             account_cat: account_type.value[0].cat,
             currency: currency.value
         }))
+        setMessage('thank you');
         setTimeout(() => {
             Router.push('/accounts')
         }, 350 )
-        // reset();
-        // setMessage('thank you');
+
+       
         // console.log(valAcc)
         
     }
