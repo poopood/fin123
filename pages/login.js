@@ -2,17 +2,12 @@ import {useState} from 'react';
 import { connect } from 'react-redux';
 import Link from 'next/link';
 import {useForm, Controller } from 'react-hook-form';
-import {auth} from '../src/firebase/firebase';
-import  Router from 'next/router';
-import {startSignInUser} from '../src/actions/UserActions';
-import jwt from 'jsonwebtoken';
 
+import {startSignInUser} from '../src/actions/UserActions';
+
+//error message
 
 const Login = (props) => {
-
-    // var decoded = jwt.verify(token, 'shhhhh');
-    // console.log(auth.currentUser.uid, 'sdfdsfsdfsdf')
-    console.log(props)
 
     const [error, setError] = useState('')
     
@@ -54,9 +49,9 @@ const Login = (props) => {
 
 // export default Login;
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
-        userState : state.userState.userID
+
     };
 };
 
