@@ -13,7 +13,7 @@ const AddTransactionPage = (props) => {
     return(
         <div>
             Hello from Add Transaction Page
-            <AddTransactionForm accounts={props.accounts} expenseCats={props.expense} incomeCats={props.income}/>
+            <AddTransactionForm accounts={props.accounts} expenseCats={props.expenseCats} incomeCats={props.incomeCats}/>
         </div>
     )
 }
@@ -90,8 +90,8 @@ export const getServerSideProps = async (context) => {
     return {
       props : {
         accounts: [...userAccounts],
-        expense: [...userExpenseCategories],
-        income:[...userIncomeCategories]
+        expenseCats: [...userExpenseCategories],
+        incomeCats:[...userIncomeCategories]
       }
     }
   }
