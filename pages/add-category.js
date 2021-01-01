@@ -9,7 +9,7 @@ import cookie from 'cookie';
 import db from '../src/firebase/firebase';
 
 const AddCategory = (props) => {
-    console.log(props, 'milly props')
+  
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }
@@ -20,21 +20,21 @@ const AddCategory = (props) => {
 
     {props.expenseCategories && (
         props.expenseCategories.map(e => {
-            // console.log(e.value.indexOf('shiloh'), 'eem')
+      
             
             eCatsValues.push(e.value);
             
         })
-        // console.log(props.expenseCategories.indexOf('shiloh'), 'shanil respect the poms')
+      
         
     )}
     {props.IncomeCategories && (
         props.IncomeCategories.map(e => {
-            // console.log(e.value.indexOf('shiloh'), 'eem')
+          
             iCatsValues.push(e.value);
             
         })
-        // console.log(props.expenseCategories.indexOf('shiloh'), 'shanil respect the poms')
+      
         
     )}
    
@@ -54,14 +54,14 @@ const AddCategory = (props) => {
         } else if(iCatsValues.indexOf(e) > -1){
             iCatsValues.splice(e, 1)
         }
-        // console.log(e, id,entry);
+        
         props.dispatch(removeCategory(id,entry));
         Router.push('/add-category');
       
     }
 
     const watchEntry = watch("entry", {value:'expense', label: 'Expense'});
-    // {console.log(watchEntry.label, 'entry.label')}
+ 
 
     const formData = ({name ,entry}) => {
        let  capitalizedName = name.capitalize();
@@ -74,11 +74,11 @@ const AddCategory = (props) => {
                 
             }
         })
-        // console.log(props.expenseCategories.indexOf('shiloh'), 'shanil respect the poms')
+      
     )}
        
         if(watchEntry.label === "Expense"){
-            // props.dispatch(startAddExpenseCategory({value: `${name}`, label: `${capitalizedName}`}))
+           
 
             if(eCatsValues.indexOf(name) < 0){
                     props.dispatch(startAddExpenseCategory({value: `${name}`, label: `${capitalizedName}`}))     
@@ -109,7 +109,7 @@ const AddCategory = (props) => {
                 setMessage('');
             }, 2500)
         }
-            // props.dispatch(startAddIncomeCategory({value: `${name}`, label: `${capitalizedName}`}))
+          
         }
 
         }
@@ -187,7 +187,7 @@ export const getServerSideProps =  async (context) => {
     let expenseCats = [];
     let IncomeCats = [];
 
-    const dbdb = await db.ref(`users/${decoded}/categories/expense`)
+    const dbreqExpenseCats = await db.ref(`users/${decoded}/categories/expense`)
     .once('value')
         .then((snapshot) => snapshot.val())
         .then((val) => {
@@ -205,7 +205,7 @@ export const getServerSideProps =  async (context) => {
         console.log('error fetching data', e)
     })
 
-    const dbdb2 = await db.ref(`users/${decoded}/categories/income`)
+    const dbreqIncomeCats = await db.ref(`users/${decoded}/categories/income`)
     .once('value')
         .then((snapshot) => snapshot.val())
         .then((val) => {
@@ -234,7 +234,7 @@ export const getServerSideProps =  async (context) => {
 
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
 
 
