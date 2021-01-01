@@ -4,7 +4,6 @@ import Link from 'next/link';
 import {useForm, Controller } from 'react-hook-form';
 import {auth} from '../src/firebase/firebase';
 import startAddUser, {startSignInUser} from '../src/actions/UserActions';
-import { startAddAccount } from '../src/actions/AccountActions';
 import db from '../src/firebase/firebase';
 
 
@@ -12,8 +11,7 @@ import db from '../src/firebase/firebase';
 const SignUp = (props) => {
     const [error, setError] = useState('')
     const [message, setMessage] = useState('');
-    console.log(props)
-    // const user = auth.currentUser;
+
     
     const {register, handleSubmit,control, errors, reset} = useForm({
         mode: "onChange",
@@ -23,6 +21,7 @@ const SignUp = (props) => {
     
     const formData = ({name, email, password}) => {
         // console.log(name, email, password)
+        //create an action here for the sign up and the subsequent adding of default accounts
         auth.createUserWithEmailAndPassword(email, password)
             .then((cred) => {
                 const {uid } = cred.user;
@@ -34,14 +33,7 @@ const SignUp = (props) => {
                 const defaultAccount1 = {name : `${name}'s Cash`, currentAmount : 0, account_cat : "Assets", account_type : "Wallet", currency : "USD"}
                 const defaultAccount2 = {name : `${name}'s Credit Card`, currentAmount : 0, account_cat : "Liabilities", account_type : "Credit Card", currency : "USD"}
                 const defaultCategory = {value:'other', label:'Other'};
-                // props.dispatch(startAddAccount({
-                //     name: defaultAccount1.name,
-                //     currentAmount: defaultAccount1.currentAmount,
-                //     account_type: defaultAccount1.type,
-                //     account_cat  : defaultAccount1.cat,
-                //     currency: defaultAccount1.currency
-
-                // }))
+               
                 
             db.ref(`users/${uid}/accounts`).push(defaultAccount1)
             .then(() => {
@@ -55,13 +47,7 @@ const SignUp = (props) => {
                 })
                 
             })
-           
 
-               
-                  
-                        
-                
-                
             })
             .catch((e) => {
                 setError(e.message);
@@ -100,9 +86,9 @@ const SignUp = (props) => {
 
 // export default Login;
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {    
-        auth : state.userState
+        
     };
 };
 
