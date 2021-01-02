@@ -5,7 +5,6 @@ import EditTransactionForm from '../../../src/components/EditTransactionForm';
 import Link from 'next/link';
 
 const TransactionToEdit = (props) => {
-
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
@@ -32,39 +31,37 @@ const TransactionToEdit = (props) => {
     let accounts = props.accounts;
     let transaction = props.transaction[0];
 
+
     let AccountsIDcat = [];
     let TransactionIDcat = [];
     let transactionLabels = [];
     
-
-
-  let AddAccountsLink = [{'label':<Link href={`/add-account`}>
+    let AddAccountsLink = [{'label':<Link href={`/add-account`}>
     
     
-  <a>Add Account</a>
-</Link>,isDisabled: true}]
-  props.accounts.map((e) => {
-    AddAccountsLink.unshift({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
-        <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
-  })
+    <a>Add Account</a>
+    </Link>,isDisabled: true}]
+    props.accounts.map((e) => {
+        AddAccountsLink.unshift({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
+            <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
+    })
 
-
-  accounts.map((e) => {
-    if(transaction.aid === e.id){
+    accounts.map((e) => {
+        if(transaction.aid === e.id){
         return(
-          AccountsIDcat.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
-               })
+            AccountsIDcat.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
+            })
+        )
+        }
+        })
+    accounts.map((e) => {
+    if(transaction.aid1 === e.id){
+        return(
+            TransactionIDcat.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
+            })
         )
     }
-})
-accounts.map((e) => {
-  if(transaction.aid1 === e.id){
-    return(
-      TransactionIDcat.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
-           })
-    )
-}
-})
+    })
 
 props.transaction.map((e) => {
   return(
@@ -73,10 +70,11 @@ props.transaction.map((e) => {
 })
 
 
+ 
     return(
         <div>
         <h4>Edit Transaction</h4>
-        <EditTransactionForm transaction={props.transaction[0]} tid={props.tid} accounts={props.accounts} AddAccountsLink={AddAccountsLink} AccountsIDcat={AccountsIDcat}  TransactionIDcat={TransactionIDcat} expenseCats={props.expense} incomeCats={props.income} category={transaction.category} transactionLabels={transactionLabels} description={props.description} />
+        <EditTransactionForm transaction={props.transaction[0]} tid={props.tid} accounts={props.accounts} AddAccountsLink={AddAccountsLink} AccountsIDcat={AccountsIDcat} TransactionIDcat={TransactionIDcat} expenseCats={props.expense} incomeCats={props.income} category={transaction.category} transactionLabels={transactionLabels} description={props.description} />
         </div>
 
     )
@@ -85,7 +83,6 @@ props.transaction.map((e) => {
 export const getServerSideProps = async ({params, req}) => {
 
     let TransactionID = params.id
-
 
     let decoded = 'dGZZ2xH3toXlfGU2W2F5iifEkMJ3'
   if(req.headers.cookie){
@@ -96,7 +93,7 @@ export const getServerSideProps = async ({params, req}) => {
     let transactionToEdit = [];
     let expenseCategories = [];
     let incomeCategories = [];
-   const dbreqTID = await db.ref(`users/${decoded}/transactions/${TransactionID}`)
+   const dbdb = await db.ref(`users/${decoded}/transactions/${TransactionID}`)
   .once('value')
       .then((snapshot) => snapshot.val())
       
@@ -108,11 +105,11 @@ export const getServerSideProps = async ({params, req}) => {
       console.log('error fetching data', e)
   })
  let transactionDescription;
-  const dbreqTdesc = await db.ref(`users/${decoded}/transactions/${TransactionID}/description`)
+  const dbdb5 = await db.ref(`users/${decoded}/transactions/${TransactionID}/description`)
   .once('value')
       .then((snapshot) => {
         return(
-          transactionDescription = snapshot.val()
+            transactionDescription = snapshot.val()
         )
       })
       
@@ -121,7 +118,7 @@ export const getServerSideProps = async ({params, req}) => {
   })
 
   let allAccounts = [];
-     const dbreqAllAccs = await db.ref(`users/${decoded}/accounts`)
+     const bdbd = await db.ref(`users/${decoded}/accounts`)
     .once('value')
         .then((snapshot) => snapshot.val())
         .then((val) => {
@@ -141,12 +138,12 @@ export const getServerSideProps = async ({params, req}) => {
 
     // category 
 
-    const dbreqExpenseCats = await db.ref(`users/${decoded}/categories/expense`)
+    const dbdb1 = await db.ref(`users/${decoded}/categories/expense`)
   .once('value')
       .then((snapshot) => snapshot.val())
       .then((val) => {
         Object.keys(val).map((key) => {
-          expenseCategories.push({
+            expenseCategories.push({
             id: key,
             ...val[key]
           })
@@ -158,12 +155,12 @@ export const getServerSideProps = async ({params, req}) => {
       .catch((e) => {
       console.log('error fetching data', e)
   })
-  const dbreqIncomecats = await db.ref(`users/${decoded}/categories/income`)
+  const dbdb2 = await db.ref(`users/${decoded}/categories/income`)
   .once('value')
       .then((snapshot) => snapshot.val())
       .then((val) => {
         Object.keys(val).map((key) => {
-          incomeCategories.push({
+            incomeCategories.push({
             id: key,
             ...val[key]
           })
