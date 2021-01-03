@@ -1,17 +1,14 @@
 import db from '../../../src/firebase/firebase';
-// import Cookies from 'js-cookie';
-// import {LogoutUser} from '../src/actions/UserActions';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import EditAccountForm from '../../../src/components/EditAccountForm';
 
-const ss = (props) => {
-    console.log(props)
+const EditableAccount = (props) => {
+    
     return(
         <div>
         <h4>Edit Account</h4>
-        <EditAccountForm account={props.account[0]} aid={props.aid}/>
-        
+        <EditAccountForm account={props.account[0]} aid={props.aid}/>  
         </div>
 
     )
@@ -19,22 +16,22 @@ const ss = (props) => {
 
 export const getServerSideProps = async ({params, req}) => {
 
-    let pinter = params.id
+    let idOfAccountToEdit = params.id
 
-    console.log(pinter)
+   
     let decoded = 'dGZZ2xH3toXlfGU2W2F5iifEkMJ3'
   if(req.headers.cookie){
     const parsedCookies = cookie.parse(req.headers.cookie)
     decoded = jwt.decode(parsedCookies.userId, { header: true })
   }
 
-    let kist = [];
-   const dbdb = await db.ref(`users/${decoded}/accounts/${pinter}`)
+    let accountToEdit = [];
+   const dbdb = await db.ref(`users/${decoded}/accounts/${idOfAccountToEdit}`)
   .once('value')
       .then((snapshot) => snapshot.val())
       
       .then((val) => {
-        kist.push(val)
+        accountToEdit.push(val)
 
   })
       .catch((e) => {
@@ -44,11 +41,11 @@ export const getServerSideProps = async ({params, req}) => {
 
     return {
         props : {
-            account : [...kist],
-            aid: pinter
+            account : [...accountToEdit],
+            aid: idOfAccountToEdit
         }
     }
 
 }
 
-export default ss;
+export default EditableAccount;
