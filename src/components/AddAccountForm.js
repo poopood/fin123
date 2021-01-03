@@ -11,7 +11,7 @@ import NumberFormat from "react-number-format";
 
 const AddAccountForm = (props) => {
     const [message, setMessage] = useState('');
-    const {register, handleSubmit,control, errors, reset} = useForm({
+    const {register, handleSubmit,control, errors} = useForm({
         defaultValues : {
             category: [{value: 'food', label: 'food'}]
         },
@@ -22,8 +22,7 @@ const AddAccountForm = (props) => {
 
     const formData = ({name,currency,currentAmount,account_type}) => {
         
-        const valAcc = account_type.value[1].type
-        console.log(valAcc)
+     
         props.dispatch(startAddAccount({
             name,
             currentAmount : parseFloat(currentAmount.replace(/\D/g, "")),
@@ -36,8 +35,7 @@ const AddAccountForm = (props) => {
             Router.push('/accounts')
         }, 350 )
 
-       
-        // console.log(valAcc)
+    
         
     }
 
@@ -109,7 +107,7 @@ const AddAccountForm = (props) => {
 const mapStateToProps = (state) => {
     return {
         transactions : state.transactions,
-        formState : state.formState
+
     };
 };
 
