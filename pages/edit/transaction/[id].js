@@ -6,7 +6,7 @@ import EditTransactionForm from '../../../src/components/EditTransactionForm';
 import Link from 'next/link';
 
 const TransactionToEdit = (props) => {
-  console.log(props,'drops son');
+
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
@@ -32,22 +32,20 @@ const TransactionToEdit = (props) => {
 
     let accounts = props.accounts;
     let transaction = props.transaction[0];
+    let transferAccount = [];
 
-
-    let dogs = [];
-    let bats = [];
-    let visigoths = [];
-    let burrito = [];
+    let AccountsIDcat = [];
+    let transactionLabels = [];
     
 
 
-  let cats = [{'label':<Link href={`/add-account`}>
+  let AddAccountsLink = [{'label':<Link href={`/add-account`}>
     
     
   <a>Add Account</a>
 </Link>,isDisabled: true}]
   props.accounts.map((e) => {
-      cats.unshift({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
+    AddAccountsLink.unshift({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
         <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
   })
 
@@ -57,23 +55,25 @@ const TransactionToEdit = (props) => {
   accounts.map((e) => {
     if(transaction.aid === e.id){
         return(
-            dogs.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
+          AccountsIDcat.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
                })
         )
     }
 })
+
 accounts.map((e) => {
   if(transaction.aid1 === e.id){
     return(
-        visigoths.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
+      transferAccount.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: e.name
            })
     )
 }
 })
 
+
 props.transaction.map((e) => {
   return(
-    burrito.push(e.labels)
+    transactionLabels.push(e.labels)
   )
 })
 
@@ -82,7 +82,7 @@ props.transaction.map((e) => {
     return(
         <div>
         <h4>Edit Transaction</h4>
-        <EditTransactionForm transaction={props.transaction[0]} tid={props.tid} accounts={props.accounts} cats={cats} dogs={dogs} bats={bats} visigoths={visigoths} expenseCats={props.expense} incomeCats={props.income} category={transaction.category} burrito={burrito} description={props.description} />
+        <EditTransactionForm transaction={props.transaction[0]} tid={props.tid} accounts={props.accounts} AddAccountsLink={AddAccountsLink} AccountsIDcat={AccountsIDcat}   expenseCats={props.expense} incomeCats={props.income} category={transaction.category} transactionLabels={transactionLabels} description={props.description} transferAccount={transferAccount}/>
         </div>
 
     )
@@ -102,7 +102,7 @@ export const getServerSideProps = async ({params, req}) => {
     let transactionToEdit = [];
     let expenseCategories = [];
     let incomeCategories = [];
-   const dbdb = await db.ref(`users/${decoded}/transactions/${TransactionID}`)
+   const dbreqTransaction = await db.ref(`users/${decoded}/transactions/${TransactionID}`)
   .once('value')
       .then((snapshot) => snapshot.val())
       
@@ -113,12 +113,12 @@ export const getServerSideProps = async ({params, req}) => {
       .catch((e) => {
       console.log('error fetching data', e)
   })
- let dbdesc;
-  const dbdb5 = await db.ref(`users/${decoded}/transactions/${TransactionID}/description`)
+ let transactionDescription;
+  const dbreqTransactionID = await db.ref(`users/${decoded}/transactions/${TransactionID}/description`)
   .once('value')
       .then((snapshot) => {
         return(
-          dbdesc = snapshot.val()
+          transactionDescription = snapshot.val()
         )
       })
       
@@ -126,13 +126,13 @@ export const getServerSideProps = async ({params, req}) => {
       console.log('error fetching data', e)
   })
 
-  let mist = [];
-     const bdbd = await db.ref(`users/${decoded}/accounts`)
+  let allAccounts = [];
+     const dbreqAllAccounts = await db.ref(`users/${decoded}/accounts`)
     .once('value')
         .then((snapshot) => snapshot.val())
         .then((val) => {
           Object.keys(val).map((key) => {
-            mist.push({
+            allAccounts.push({
               id: key,
               ...val[key]
             })
@@ -147,7 +147,7 @@ export const getServerSideProps = async ({params, req}) => {
 
     // category 
 
-    const dbdb1 = await db.ref(`users/${decoded}/categories/expense`)
+    const dbreqAllExpenseCat = await db.ref(`users/${decoded}/categories/expense`)
   .once('value')
       .then((snapshot) => snapshot.val())
       .then((val) => {
@@ -164,7 +164,7 @@ export const getServerSideProps = async ({params, req}) => {
       .catch((e) => {
       console.log('error fetching data', e)
   })
-  const dbdb2 = await db.ref(`users/${decoded}/categories/income`)
+  const dbreqAllIncomeCat = await db.ref(`users/${decoded}/categories/income`)
   .once('value')
       .then((snapshot) => snapshot.val())
       .then((val) => {
@@ -187,10 +187,10 @@ export const getServerSideProps = async ({params, req}) => {
         props : {
             transaction : [...transactionToEdit],
             tid: TransactionID,
-            accounts: [...mist],
+            accounts: [...allAccounts],
             expense: [...expenseCategories],
             income:[...incomeCategories],
-            description: dbdesc
+            description: transactionDescription
         }
     }
 

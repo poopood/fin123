@@ -10,50 +10,32 @@ import 'react-dates/initialize';
 import {SingleDatePicker} from 'react-dates';
 import NumberFormat from "react-number-format";
 import Link from 'next/link';
-// import {groupedOptions} from '../utils/data';
-// import {categoryOptions,categoryOptions2} from '../utils/data';
 
 const AddTransactionForm = (props) => {
-    console.log(props);
-    console.log(props.category.label, 'categoory')
-    // props.transaction.entry
-    const tortilla = props.transaction.entry === 'expense' || props.transaction.entry === 'income'? [{ value: "expense", label: "Expense" },
+  
+ 
+    const transactionEntry = props.transaction.entry === 'expense' || props.transaction.entry === 'income'? [{ value: "expense", label: "Expense" },
     { value: "income", label: "Income" }]: [
         { value: "transfer", label: "Transfer" }
         ];
-    // {props.transaction.entry === "expense" || props.transaction.entry === 'income' && (
-    //     tortilla.push([
-    //         { value: "expense", label: "Expense" },
-    //         { value: "income", label: "Income" }
-    //         ])
-    // )}
-    // {props.transaction.entry === "transfer" &&(
-    //     tortilla.push([
-    //         { value: "transfer", label: "Transfer" }
-    //         ])
-    // )}
-    
-    console.log(props.transaction.amount, 'edit transactions')
-    console.log(props, 'poops')
-    let cats = props.cats;
 
-
-    let bats = props.bats;
-    let dogs = props.dogs;
-    let visigoths = props.visigoths;
-    let burritos = [];
-//    console.log(dogs[0].label);
     
-    // console.log(props.accounts,'meehow')
-    // console.log(props.transaction,'meehow3')
+    let AddAccountsLink = props.AddAccountsLink;
+
+    let transferAccount = props.transferAccount;
+    
+    let AccountsIDcat = props.AccountsIDcat;
+
+    let transactionLabels = [];
+
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }
 
-    props.burrito.map(e => {
-        burritos.push({value:e, label: e})
+    props.transactionLabels.map(e => {
+        transactionLabels.push({value:e, label: e})
     })
-    // console.log(burritos, 'burritos')
+
     
     let Linkedcats = [{'label':<Link href={`/add-category`}>
     
@@ -73,25 +55,11 @@ const AddTransactionForm = (props) => {
     props.incomeCats.map((e) => {
         LinkedcatsI.unshift({value:e.value, label: e.label})
     })
-    // console.log(dogs)
-    // accounts.map((e) => {
-    //     if(transaction.aid === e.id){
-    //         return(
-    //             dogs.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
-    //                 <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
-    //         )
-    //     } else if (e.id === e.id){
-    //         cats.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
-    //             <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
-    //     }
-    // })
-    // console.log(cats, 'cats')
-    // console.log(dogs, 'dogs')
+
    
 
     const [message, setMessage] = useState('');
-    // const [cats, setCats] = useState([]);
-    // const [dogs, setDogs] = useState([]);
+   
     const [ cA, setcA] = useState(moment(`${props.transaction.createdAt}`));
     const [focus, setFocus] = useState(null);
 
@@ -104,52 +72,14 @@ const AddTransactionForm = (props) => {
 
   
         const {register, handleSubmit,control, errors,watch} = useForm({
-            // defaultValues : {
-            //     category: [{value: `${props.transaction.category.map(e =>  e[0])}`, label:`${props.transaction.category.map(e =>  e)}` }]
-            // },
-            // defaultValues : {
-            //     category: [{value: `${props.transaction.category.map(e =>  [...e])}`, label:`${props.transaction.category.map(e =>  [...e])}` }]
-            // },
-           
+     
             mode: "onChange",
             shouldFocusError: true,
             shouldUnregister: true,
         });
 
     const formData = ({name, amount, entry, category,account, account1}) => {
-        // console.log(cA.toString())
-        // const categoryArray = category ? category.map((item) => item.value) : undefined;
-        // console.log(account)
-        // const aid = account.value[2].aid ?
-
-        // const EITransaction = {
-        //     name,
-        //     amount : parseFloat(amount.replace(/\D/g, "")),
-        //     category: category,
-        //     entry: entry.value,
-        //     account_type: account.value[1].type,
-        //     account_cat: account.value[0].cat,
-        //     createdAt : cA.toISOString(),
-        //     aid : account.value[2].aid,
-        //     tid: props.tid,
-        //     prevAmount: props.transaction.amount
-        //  }
-        
-        // const Transfer = {
-        //     name,
-        //     amount : parseFloat(amount.replace(/\D/g, "")),
-        //     entry: entry.value,
-        //     account_type: account.value[1].type,
-        //     account_cat: account.value[0].cat,
-        //     createdAt : cA.toISOString(),
-        //     aid : account.value[2].aid,
-        //     account1_type: account1.value[1].type,
-        //     account1_cat: account1.value[0].cat,
-        //     aid1 : account1.value[2].aid,
-        //     tid: props.tid,
-        //     prevAmount: props.transaction.amount
-
-        // }
+    
 
         {(watchEntry.label === "Expense" || watchEntry.label === "Income") && (
             props.dispatch(startEditTransaction({
@@ -184,90 +114,21 @@ const AddTransactionForm = (props) => {
                 prevAmount: props.transaction.amount
     
             }))
-            // console.log(Transfer, "hallelujah")
+          
         )}
 
-        
-        // props.dispatch(startEditTransaction(
-        //     {
-        //         name,
-        //         amount : parseFloat(amount.replace(/\D/g, "")),
-        //         category: categoryArray,
-        //         entry: entry.value,
-        //         account_type: account.value[1].type,
-        //         account_cat: account.value[0].cat,
-        //         createdAt : cA.toISOString(),
-        //         tid: props.tid,
-        //         aid : account.value[2].aid,
-        //         prevAmount: props.transaction.amount
-        //         }
-        //         ))
-        // console.log( account.value[1].type,'fuckout')
-        // console.log(name,amount,categoryArray, date,submit);
-        
 
         setMessage('thank you');
-        // // setTimeout(function(){ alert("Hello"); }, 3000);
         setTimeout(() => {
             Router.push('/')
         }, 1000 )
-        // console.log(name, amount, categoryArray, entry.value, account.value, cA.toISOString(),props.tid)
-        
+
     }
 
-
-
-    // let accounts = props.accounts;
-    // let transaction = props.transaction;
-
-    // let bats = [];
-
-    // props.transaction.category.map(e =>  {
-    //     return(
-    //         bats.push({label:e.capitalize() , value:e})
-    //         // [...cats,{label: e, value: e}]
-    //     )
-    // })
-    // console.log(bats, 'bats')
-    // let cats = [];
-    // let dogs = [];
-    
-    // let accountDefaultValue = [];
-        // this.cats = cats;
-        // this.dogs = dogs;
-        // accounts.map(e => {
-        //     return(
-        //         cats.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
-        //             <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
-        //     )
-        // })
-        // accounts.map(e => {
-        //     if(transaction.aid === e.id)
-        //     return(
-        //         dogs.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
-        //             <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
-        //     )
-                    
-        // })
-
-        // accounts.map((e) => {
-        //     if(transaction.aid === e.id){
-        //         return(
-        //             dogs.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
-        //                 <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
-        //         )
-        //     }
-        // })
-
-   
-    // let dogsZero = dogs[0];
-    // console.log(dogs, 'dags');
-    // console.log(cats, 'cats');
     
     const watchEntry = watch("entry", {value: `${props.transaction.entry}` , label : `${props.transaction.entry.capitalize()}`}); // 
 
 
-   
 
     return(
         <div className="transaction-app">
@@ -340,7 +201,7 @@ const AddTransactionForm = (props) => {
             <Controller
                 name="entry"
                 as={Select}
-                options={tortilla}
+                options={transactionEntry}
                 defaultValue={{value: `${props.transaction.entry}` , label : `${props.transaction.entry.capitalize()}`}}
                 control={control}
                 rules={{ required: true }}
@@ -390,8 +251,8 @@ const AddTransactionForm = (props) => {
                 <Controller
                 name="account1"
                 as={Select}
-                options={cats}
-                defaultValue={cats[0]}
+                options={AddAccountsLink}
+                defaultValue={transferAccount}
                 control={control}
                 rules={{ required: true }}
                 
@@ -406,7 +267,7 @@ const AddTransactionForm = (props) => {
             <p htmlFor="labels">Add a Label</p>
                 <Controller
                     as={CreatableSelect}
-                    defaultValue={burritos}
+                    defaultValue={transactionLabels}
                     name="labels"
                     isMulti
                     options={labelOptions}
@@ -425,8 +286,8 @@ const AddTransactionForm = (props) => {
             <Controller
                 name="account"
                 as={Select}
-                options={cats}
-                defaultValue={dogs[0]}
+                options={AddAccountsLink}
+                defaultValue={AccountsIDcat[0]}
                 control={control}
                 rules={{ required: true }}
                 
