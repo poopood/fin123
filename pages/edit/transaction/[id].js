@@ -43,7 +43,7 @@ const TransactionToEdit = (props) => {
     
     
   <a>Add Account</a>
-</Link>,isDisabled: true}]
+</Link>,isDisabled: true}]  
   props.accounts.map((e) => {
     AddAccountsLink.unshift({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
         <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
