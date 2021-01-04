@@ -3,8 +3,6 @@ const AccountsReducerDefaultState = {
 }
 const AccountsReducer = (state = AccountsReducerDefaultState.accounts) => {
     switch(action.type) {
-        case 'HYDRATE':
-            return action.accounts;
         case 'ADD_ACCOUNT':
             return[
                 ...state,
