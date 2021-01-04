@@ -4,18 +4,17 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import {useForm, Controller } from 'react-hook-form';
 import {startAddTransaction,startAddTransferTransaction} from '../actions/TransactionsActions';
-// import {startAddExpenseCategory,startAddIncomeCategory} from '../actions/OtherActions';
+
 import  Router from 'next/router';
 import moment from 'moment';
 import 'react-dates/initialize';
 import {SingleDatePicker} from 'react-dates';
 import NumberFormat from "react-number-format";
-// import {categoryOptions,categoryOptions2} from '../utils/data';
-// import {cats} from '../utils/data';
+
 import Link from "next/link";
 
 const AddTransactionForm = (props) => {
-    console.log(props, 'props from indside');
+
     const groupStyles = {
         display: 'flex',
         alignItems: 'center',
@@ -33,17 +32,15 @@ const AddTransactionForm = (props) => {
         padding: '0.16666666666667em 0.5em',
         textAlign: 'center',
       };
-    //   let linkcats = [{'label':<Link href={`/add-account`}>
-    // const cats = props.cats;
-    // let cats = [];
+  
     
-    let cats = [{'label':<Link href={`/add-account`}>
+    let accountsWLink = [{'label':<Link href={`/add-account`}>
     
     
     <a>Add Account</a>
 </Link>,isDisabled: true}]
     props.accounts.map((e) => {
-        cats.unshift({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
+        accountsWLink.unshift({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
           <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
     })
 
@@ -65,42 +62,7 @@ const AddTransactionForm = (props) => {
     props.incomeCats.map((e) => {
         LinkedcatsI.unshift({value:e.value, label: e.label})
     })
-    // console.log(cats, 'cats');
-
-    // props.accounts.category.map(e =>  {
-    //     return(
-    //         cats.push({label:e.capitalize() , value:e})
-    //         // [...cats,{label: e, value: e}]
-    //     )
-    // })
-    // console.log(cats, 'cats')
-    // const groupStyles = {
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'space-between',
-    //   };
-    //   const groupBadgeStyles = {
-    //     backgroundColor: '#EBECF0',
-    //     borderRadius: '2em',
-    //     color: '#172B4D',
-    //     display: 'inline-block',
-    //     fontSize: 12,
-    //     fontWeight: 'normal',
-    //     lineHeight: '1',
-    //     minWidth: 1,
-    //     padding: '0.16666666666667em 0.5em',
-    //     textAlign: 'center',YY
-    //   };
-
-    // let cats = [];
-
-    // props.accounts.map(e => {
-    //     return(
-    //         cats.push({value:[{cat: e.account_cat}, {type: e.account_type }, {aid: e.id}], label: <div style={groupStyles}><span>{e.name}</span>
-    //             <span style={groupBadgeStyles}>${e.currentAmount}</span></div>})
-    //     )
-    // })
-    // console.log(cats, 'cats');
+    
   
 
     const [message, setMessage] = useState('');
@@ -108,22 +70,14 @@ const AddTransactionForm = (props) => {
     const [focus, setFocus] = useState(null);
     const minDate = new Date("2020-06-04T08:05:10");
     const maxDate = new Date("2022-01-04T08:05:10");
-    // const maxDate = new Date("2021-01-04T08:05:10");
+
 
     const labelOptions = [
         {label:"e.g.", isDisabled: true},
         { value: "#Misc", label: "#Misc"  },
         { value: "#2021", label: "#2021"  },
       ]
-    // const categoryOptions2 = [
-    //     { value: "entertainment", label: "fvfv"},
-    //     { value: "33", label: "33"},
-    //     { value: "rent", label: "33"}
-    //   ]
-
-    //   const handleMultiChange = (option) => {
-    //       console.log(option,'changed');
-    //   }
+  
   
         const {register, handleSubmit,control, errors,watch} = useForm({
             // defaultValues : {
@@ -133,66 +87,13 @@ const AddTransactionForm = (props) => {
             shouldFocusError: true,
             shouldUnregister: true,
         });
-        // const watchEntry = watch("entry", {value:'expense', label: 'Expense'}); // you can supply default value as second argument
-        // // const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
-        // // const watchFields = watch(["entry", "number"]);
-        // console.log("watchEntry", watchEntry);
-
+       
 
     const formData = ({name, amount, entry, category,account, account1, labels,description}) => {
         
-        // console.log(cA.toString())
-        // const categoryArray = category ? category.map((item) => item.value) : undefined;
-        // console.log(description, 'description')
-        const labelsArray = labels ? labels.map((item) => item.value) : undefined;
-        // console.log(labelsArray)
-        // if(recur){
-        //         props.dispatch(startAddRecurringTransaction({
-        //         name,
-        //         amount : parseFloat(amount.replace(/\D/g, "")),
-        //         category: categoryArray,
-        //         entry: entry.value,
-        //         account_type: account.value[1].type,
-        //         account_cat: account.value[0].cat,
-        //         createdAt : cA.toISOString(),
-        //         aid : account.value[2].aid,
-        //         recur: recur.value
-        //      }))    
         
-        // } else {
-            
-        // }
-
-
-        // console.log(parseFloat(amount.replace(/\D/g, "")));
-        // console.log(account.value[2].aid)
-        // const account1 = account1 ? account1 : '';
-        // const EITransaction = {
-        //     name,
-        //     amount : parseFloat(amount.replace(/\D/g, "")),
-        //     category: categoryArray,
-        //     entry: entry.value,
-        //     account_type: account.value[1].type,
-        //     account_cat: account.value[0].cat,
-        //     createdAt : cA.toISOString(),
-        //     aid : account.value[2].aid }
-
-        // const Transfer = {
-        //     name,
-        //     amount : parseFloat(amount.replace(/\D/g, "")),
-        //     entry: entry.value,
-        //     account_type: account.value[1].type,
-        //     account_cat: account.value[0].cat,
-        //     createdAt : cA.toISOString(),
-        //     aid : account.value[2].aid,
-        //     account1_type: account1.value[1].type,
-        //     account1_cat: account1.value[0].cat,
-        //     aid1 : account1.value[2].aid,
-         
-
-        // }
-        // console.log(account2,'2BE2BE')
-        //activate
+        const labelsArray = labels ? labels.map((item) => item.value) : undefined;
+        
         {(watchEntry.label === "Expense" || watchEntry.label === "Income") && (
             props.dispatch(startAddTransaction({
                 name,
@@ -229,18 +130,6 @@ const AddTransactionForm = (props) => {
                 }
             ))
         )}
-            // props.dispatch(startAddTransaction(
-            
-            //     EITransaction
-                
-            //     ))
-  
-        
-        // console.log(dpdp);
-        // console.log(name)
-        
-        // reset(); *this creates an infinite loop
-        //activate
         setMessage('thank you');
        
         setTimeout(() => {
@@ -250,36 +139,10 @@ const AddTransactionForm = (props) => {
     }
    
     
-    const watchEntry = watch("entry", {value:'expense', label: 'Expense'}); // you can supply default value as second argument
+    const watchEntry = watch("entry", {value:'expense', label: 'Expense'}); 
     const watchCategory = watch("category",{value:'entertainment', label: 'Entertainment',__isNew__:false}); 
-    const watchRecurring = watch("isRecurring", false)
-    // console.log(watchRecurring, 'watchisRecurring')
+    // const watchRecurring = watch("isRecurring", false)
 
-
-    // const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
-    // const watchFields = watch(["entry", "number"]);
-    // console.log("watchEntry", watchEntry.label);
-    // console.log( Array.isArray(watchCategory));
-    // { Array.isArray(watchCategory) && (
-        
-    //     watchCategory.map(e => {
-    //         if(watchEntry.label === "Expense" && e.__isNew__){
-                    
-    //                 // categoryOptions.push(e);
-    //                 // console.log(e.label);
-    //                 categoryOptions.push({value: `${e.value}`, label: `${e.label}`})
-    //                 console.log(categoryOptions,'homeless cats');
-                    
-    //                 // props.dispatch(startAddExpenseCategory({value: `${e.value}`, label: `${e.label}`}))
-    //                 // console.log({value: `${e.value}`, label: `${e.label}`})
-                   
-    //                 // console.log(categoryOptions);
-    //         } else if(watchEntry.label === "Expense" && e.__isNew__) {
-    //             // props.dispatch(startAddIncomeCategory({value: `${e.value}`, label: `${e.label}`}))
-    //             categoryOptions2.push({value: `${e.value}`, label: `${e.label}`})
-    //         }
-    //     })
-    // )}
     
     return(
         <div className="transaction-app">
@@ -296,9 +159,6 @@ const AddTransactionForm = (props) => {
             </label> 
                 <br/><br/>
 
-               
-                        
-                   
             
             <section>
             <label>Amount  </label>
@@ -348,40 +208,7 @@ const AddTransactionForm = (props) => {
                 //  isOutsideRange={() => false}
                  isOutsideRange={date => date.isBefore(minDate) || date.isAfter(maxDate)}
                  />
-             
-     
             </section>
-            {/*
-            <section>
-            
-            <input type="checkbox" name="isRecurring" ref={register}/>
-            <label for="isRecurring">This a recurring transaction?</label>
-            </section>
-            <section>
-            {watchRecurring && (
-            <div>
-                <p htmlFor="recur">Choose an Recurring timeline</p>
-            <Controller
-                name="recur"
-                as={Select}
-                options={[
-                { value: "daily", label: "Daily" },
-                { value: "weekly", label: "Weekly" },
-                { value: "monthly", label: "Monthly" },
-                { value: "annually", label: "Annually" }
-                ]}
-                defaultValue={{value:'monthly', label: 'Monthly'}}
-                control={control}
-                rules={{ required: true }}
-                
-            />
-            </div>
-
-
-
-
-            )}
-            </section> */}
     
             <p htmlFor="entry">Choose an Entry</p>
             <Controller
@@ -442,7 +269,7 @@ const AddTransactionForm = (props) => {
                 <Controller
                 name="account1"
                 as={Select}
-                options={cats}
+                options={accountsWLink}
                 defaultValue={''}
                 control={control}
                 rules={{ required: true }}
@@ -477,7 +304,7 @@ const AddTransactionForm = (props) => {
             <Controller
                 name="account"
                 as={Select}
-                options={cats}
+                options={accountsWLink}
                 defaultValue={''}
                 control={control}
                 rules={{ required: true }}
@@ -503,7 +330,7 @@ const AddTransactionForm = (props) => {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
 
 

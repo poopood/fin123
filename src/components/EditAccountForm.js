@@ -10,7 +10,7 @@ import NumberFormat from "react-number-format";
 
 
 const EditAccountForm = (props) => {
-    // console.log(props.account.name)
+  
     
 
 
@@ -24,10 +24,7 @@ const EditAccountForm = (props) => {
 
     const formData = ({name,currency,currentAmount,account_type}) => {
         
-        // const valAcc = account_type.value[1].type
-        // console.log(account_type[0].value[0].cat, account_type[0].value[1].type)
-        // console.log(account_type.value[1].type, account_type.value[0].cat, currency.value)
-        
+ 
         props.dispatch(startEditAccount({
             name,
             currentAmount : parseFloat(currentAmount.replace(/\D/g, "")),
@@ -45,7 +42,7 @@ const EditAccountForm = (props) => {
         
     }
     return (
-        <>
+        <div>
         <form onSubmit={handleSubmit(formData)}>
         <label> Account Name &nbsp;<span />
             <input 
@@ -106,7 +103,7 @@ const EditAccountForm = (props) => {
             {message && message}
         </form>
         <button>Delete</button>
-        </>
+        </div>
     )
 }
 
