@@ -1,4 +1,4 @@
-import {HYDRATE} from 'next-redux-wrapper';
+
 
 const transactionsReducerDefaultState = {
     transactions: []
@@ -6,8 +6,6 @@ const transactionsReducerDefaultState = {
 
 const TransactionsReducer = ( state = transactionsReducerDefaultState.transactions, action) => {
     switch (action.type) {
-        case 'HYDRATE':
-            return action.transactions
         case 'ADD_TRANSACTION':
             return [
                 ...state,
