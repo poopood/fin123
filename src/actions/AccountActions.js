@@ -2,7 +2,7 @@ import db from '../firebase/firebase';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
-import EditAccountForm from '../components/EditAccountForm';
+
 
 const AddAccount = (account) => ({
     type: 'ADD_ACCOUNT',
@@ -72,8 +72,7 @@ const startEditAccount = (
     const ucook = Cookies.get('userId');
  
     const decoded = jwt.decode(ucook, { header: true })
-    // console.log(decoded,'sdf')
-    // console.log(transaction)
+    
     return (dispatch) => {
         
         db.ref(`users/${decoded}/accounts/${aid}`).update(account).then(() => {
