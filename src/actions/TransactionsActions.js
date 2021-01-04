@@ -32,8 +32,8 @@ const startAddTransaction = (
     const ucook = Cookies.get('userId');
  
     const decoded = jwt.decode(ucook, { header: true })
-    // console.log(decoded,'sdf')
-    console.log(transaction)
+
+
     return (dispatch) => {
           
         
@@ -47,44 +47,40 @@ const startAddTransaction = (
         if(transaction.entry === 'expense'){
             db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();   
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount - amount;
+           let dbData = snapshot.val();   
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount - amount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount + amount;
+                let currentValue = dbData.currentAmount + amount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
-            
-            // console.log(currentValue, 'amount peepee')s
+
         })
         } else {
             db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();   
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount + amount;
+           let dbData = snapshot.val();   
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount + amount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount - amount;
+                let currentValue = dbData.currentAmount - amount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
             
-            // console.log(currentValue, 'amount peepee')s
+  
         })
         }
-        // let peepee;
-        
-        // console.log(peepee, 'peepee');
-        // db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: 12})
+       
         
     };
     
 }
 
-/////// 
+
 
 
 const startAddTransferTransaction = (
@@ -109,8 +105,7 @@ const startAddTransferTransaction = (
     const ucook = Cookies.get('userId');
  
     const decoded = jwt.decode(ucook, { header: true })
-    // console.log(decoded,'sdf')
-    // console.log(transaction)
+ 
     return (dispatch) => {
         
         db.ref(`users/${decoded}/transactions`).push(transaction).then((ref) => {
@@ -119,48 +114,33 @@ const startAddTransferTransaction = (
                 ...transaction
             }));
         })
-        // if(transaction.entry === 'transfer'){
-        //     db.ref(`users/${decoded}/accounts/${aid}`).once('value')
-        // .then((snapshot) => {
-        //    let peepee = snapshot.val();   
-        //     if(peepee.account_cat === 'Assets'){
-        //         let currentValue = peepee.currentAmount - amount;
-                
-        //         db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
-        //     } else {
-        //         let currentValue = peepee.currentAmount + amount;
-        //         db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
-        //     }
-            
-           
-        // })
-        // } 
+     
             db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();
+           let dbData = snapshot.val();
         
 
 
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount + amount;
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount + amount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount - amount;
+                let currentValue = dbData.currentAmount - amount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
 
             db.ref(`users/${decoded}/accounts/${aid1}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();    
+           let dbData = snapshot.val();    
 
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount - amount;
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount - amount;
                 console.log(currentValue,'sdf')
                 
                 db.ref(`users/${decoded}/accounts/${aid1}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount + amount;
+                let currentValue = dbData.currentAmount + amount;
                 db.ref(`users/${decoded}/accounts/${aid1}`).update({currentAmount: currentValue})
             }
             
@@ -202,13 +182,12 @@ const startEditTransaction = (
         
 }
  = {}) => {
-    //  console.log(dpdp)
+    
     const transaction = {name, entry,account_type,account_cat, description, category,createdAt, amount, aid,labels }
     const ucook = Cookies.get('userId');
-    // const ppAmount = {prevAmount}
+
     const decoded = jwt.decode(ucook, { header: true })
-    // console.log(decoded,'sdf')
-    // console.log(transaction)
+
     return (dispatch) => {
         
         db.ref(`users/${decoded}/transactions/${tid}`).update(transaction).then(() => {
@@ -220,26 +199,26 @@ const startEditTransaction = (
         if(transaction.entry === 'expense'){ 
         db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();   
-            if(peepee.account_cat === 'Assets'){
+           let dbData = snapshot.val();   
+            if(dbData.account_cat === 'Assets'){
                 let changeAmount = prevAmount - amount ;
-                let currentValue = peepee.currentAmount + changeAmount;
+                let currentValue = dbData.currentAmount + changeAmount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
-                // console.log(prevAmount, 'changeboi')
+             
             } else {
                 let changeAmount = prevAmount - amount;
-                let currentValue = peepee.currentAmount - changeAmount;
+                let currentValue = dbData.currentAmount - changeAmount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
             
-            // console.log(currentValue, 'amount peepee'
+        
 
             })}
     };
 }
 
-///////
+
 
 const startEditTransferTransaction = (
     {
@@ -272,34 +251,34 @@ const startEditTransferTransaction = (
             ///
             db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();
+           let dbData = snapshot.val();
         
 
 
-            if(peepee.account_cat === 'Assets'){
+            if(dbData.account_cat === 'Assets'){
                 let changeAmount = amount - prevAmount ;
-                let currentValue = peepee.currentAmount + changeAmount;
+                let currentValue = dbData.currentAmount + changeAmount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             } else {
                 let changeAmount = amount - prevAmount;
-                let currentValue = peepee.currentAmount - changeAmount;
+                let currentValue = dbData.currentAmount - changeAmount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
 
             db.ref(`users/${decoded}/accounts/${aid1}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();    
+           let dbData = snapshot.val();    
 
-            if(peepee.account_cat === 'Assets'){
+            if(dbData.account_cat === 'Assets'){
                 let changeAmount = amount - prevAmount ;
-                let currentValue = peepee.currentAmount - changeAmount;
+                let currentValue = dbData.currentAmount - changeAmount;
                 console.log(currentValue,'sdf')
                 
                 db.ref(`users/${decoded}/accounts/${aid1}`).update({currentAmount: currentValue})
             } else {
                 let changeAmount = amount - prevAmount ;
-                let currentValue = peepee1.currentAmount + changeAmount;
+                let currentValue = dbData.currentAmount + changeAmount;
                 db.ref(`users/${decoded}/accounts/${aid1}`).update({currentAmount: currentValue})
             }
             
@@ -310,14 +289,13 @@ const startEditTransferTransaction = (
         })
 
 
-            ///
         }
 
 
     }
 
 
-//////
+
 
 
 const removeTransaction= (id) => ({
@@ -334,23 +312,23 @@ const rmFromLib = (e) => {
     const ucook = Cookies.get('userId');
  
     const decoded = jwt.decode(ucook, { header: true })
-    // console.log(decoded,'sdf')
+ 
     return (dispatch) => {
 
          if(entry === 'expense'){
         db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();   
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount + amount;
+           let dbData = snapshot.val();   
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount + amount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount - amount;
+                let currentValue = dbData.currentAmount - amount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
             
-            // console.log(currentValue, 'amount peepee')s
+       
             
         })
            
@@ -359,17 +337,17 @@ const rmFromLib = (e) => {
         } else if ( entry === 'income') {
             db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();   
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount - amount;
+           let dbData = snapshot.val();   
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount - amount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount + amount;
+                let currentValue = dbData.currentAmount + amount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
             
-            // console.log(currentValue, 'amount peepee')s
+           
             
         })
         } else {
@@ -377,30 +355,30 @@ const rmFromLib = (e) => {
 
             db.ref(`users/${decoded}/accounts/${aid}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();
+           let dbData = snapshot.val();
         
 
 
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount - amount;
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount - amount;
                 
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount + amount;
+                let currentValue = dbData.currentAmount + amount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
 
             db.ref(`users/${decoded}/accounts/${aid1}`).once('value')
         .then((snapshot) => {
-           let peepee = snapshot.val();    
+           let dbData = snapshot.val();    
 
-            if(peepee.account_cat === 'Assets'){
-                let currentValue = peepee.currentAmount + amount;
+            if(dbData.account_cat === 'Assets'){
+                let currentValue = dbData.currentAmount + amount;
                 console.log(currentValue,'sdf')
                 
                 db.ref(`users/${decoded}/accounts/${aid1}`).update({currentAmount: currentValue})
             } else {
-                let currentValue = peepee.currentAmount - amount;
+                let currentValue = dbData.currentAmount - amount;
                 db.ref(`users/${decoded}/accounts/${aid1}`).update({currentAmount: currentValue})
             }
             
@@ -428,17 +406,3 @@ const rmFromLib = (e) => {
 
 export {AddTransaction, removeTransaction, startAddTransaction, rmFromLib, startEditTransaction,startAddTransferTransaction,startEditTransferTransaction};
 
-
-// const startSetUpTransactions = ({} = {}) => {
-//     return (dispatch) => {
-//         db.ref()
-//             .once('value')
-//             .then((snapshot) => {
-//             const val = snapshot.val()
-//             dispatch(setUpTransactions)
-//                 })
-//             .catch((e) => {
-//             console.log('error fetching data', e)
-//     })
-//     }
-// }

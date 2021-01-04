@@ -1,6 +1,4 @@
 import db from '../firebase/firebase';
-import {useState} from 'react';
-import Link from 'next/link';
 import {auth} from '../firebase/firebase';
 import  Router from 'next/router';
 import Cookies from 'js-cookie';
@@ -42,11 +40,7 @@ const startSignInUser = ({email, password} = {}) => {
             localStorage.setItem('User', JSON.stringify(cred.user.uid));
             const uidToken= jwt.sign(cred.user.uid, 'shhhhh');
             Cookies.set("userId", uidToken)
-            // console.log(uidToken, 'uidToken')
-            
-
-            
-            // console.log()
+          
             setTimeout(() => {
                 Router.push('/')
             }, 1000 )
@@ -65,8 +59,7 @@ const LogoutUser = () => {
         Cookies.remove('userId');
         localStorage.clear();
         Router.push('/login');
-        // console.log(data)
-        // console.log('signed out')
+  
 
     })
 }
