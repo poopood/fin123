@@ -1,54 +1,8 @@
 import db from '../firebase/firebase';
-import {auth} from '../firebase/firebase';
-import  Router from 'next/router';
+
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 
-// const startAddCategories = ({
-//     category = 'other'
-// } = {} ) => {
-//     const ucook = Cookies.get('userId');
- 
-//     const decoded = jwt.decode(ucook, { header: true })
-//     return (dispatch) => {
-//         if(entry === 'expense'){
-//             db.ref(`users/${decoded}/categories/expense`).once('value')
-//             .then((snapshot) => {
-//                let peepee = snapshot.val();   
-//                 if(peepee.account_cat === 'Assets'){
-//                     let currentValue = peepee.currentAmount + amount;
-                    
-//                     db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
-//                 } else {
-//                     let currentValue = peepee.currentAmount - amount;
-//                     db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
-//                 }
-                
-//                 // console.log(currentValue, 'amount peepee')s
-                
-//             })
-               
-    
-            
-//             } else if ( entry === 'income') {
-//                 db.ref(`users/${decoded}/categories/income`).once('value')
-//             .then((snapshot) => {
-//                let peepee = snapshot.val();   
-//                 if(peepee.account_cat === 'Assets'){
-//                     let currentValue = peepee.currentAmount - amount;
-                    
-//                     db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
-//                 } else {
-//                     let currentValue = peepee.currentAmount + amount;
-//                     db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
-//                 }
-                
-//                 // console.log(currentValue, 'amount peepee')s
-                
-//             })
-//             }
-//     }
-// }
 
 const startAddExpenseCategory = ({
     value = 'other',
