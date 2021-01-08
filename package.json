@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "chart.js": "^2.9.4",
     "cookie": "^0.4.1",
     "currency-converter-lt": "^1.0.0",
     "firebase": "^7.23.0",
@@ -20,6 +21,7 @@
     "next-cookies": "^2.0.3",
     "next-redux-wrapper": "^6.0.2",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.11.1",
     "react-datepicker": "^3.3.0",
     "react-dates": "^21.8.0",
     "react-dom": "16.13.1",

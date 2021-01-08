@@ -9,7 +9,7 @@ import cookie from 'cookie';
 import db from '../src/firebase/firebase';
 
 const AddCategory = (props) => {
-  
+//   console.log(props)
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }

@@ -56,6 +56,8 @@ const startAddTransaction = (
                 let currentValue = dbData.currentAmount + amount;
                 db.ref(`users/${decoded}/accounts/${aid}`).update({currentAmount: currentValue})
             }
+            
+            
 
         })
         } else {
