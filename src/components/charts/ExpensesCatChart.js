@@ -2,12 +2,20 @@ import React, {useState} from 'react';
 import { Bar} from 'react-chartjs-2';
 
 
-const ExpensesCatChart = () => {
+const ExpensesCatChart = (props) => {
+    console.log(props, 'expense chart')
+    var eCats = props.result.map(e => {
+        return e.name
+    })
+    var eCatCount = props.result.map(e => {
+        return e.count
+    })
+    console.log(eCats, eCatCount)
     const [chartData, setchartData] = useState({
-        labels:['Boston', 'Colombo', 'Montreal', 'Toronto', 'Kandy'],
+        labels:eCats,
         datasets:[
-            {label: 'Population',
-                data:[405,124,405,122,5],
+            {label: 'Expense Total by Category for the current month',
+                data:eCatCount,
                 backgroundColor:[
                     'rgba(255,99,132,0.6)',
                     'rgba(55,29,132,0.6)',
