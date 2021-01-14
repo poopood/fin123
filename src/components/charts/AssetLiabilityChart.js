@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2';
 
 const AssetLiabilityChart = (props) => {
     const [chartData, setchartData] = useState({
-        labels:["Assets", "Liabilities"],
+        labels:["Assets", "Liabilities", "Net Worth"],
         datasets:props.accountChartData
     })
 

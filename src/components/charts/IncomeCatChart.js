@@ -14,7 +14,7 @@ const IncomeCatChart = (props) => {
     const [chartData, setchartData] = useState({
         labels:iCats,
         datasets:[
-            {label: 'Expense Total by Category for the current month',
+            {label: 'Income Total by Category for the current month',
                 data:iCatCount,
                 backgroundColor:[
                     'rgba(255,99,12,0.6)',

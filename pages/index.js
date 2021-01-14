@@ -8,24 +8,57 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import db from '../src/firebase/firebase'
 import IncomeCatChart from '../src/components/charts/IncomeCatChart';
-import NetAssetChart from '../src/components/charts/NetAssetsChart';
+import NetIncomeChart from '../src/components/charts/NetIncomeChart';
 
 
 const Index = (props) => {
   let currentMonth = moment(new Date()).format('MMMM');
-    let currentYear= moment(new Date()).format('Y');
-  console.log(props);
-  // console.log(moment().startOf('month').format("YYYY-DD-MM"), "momee");
-  // console.log(moment().endOf("month").format("YYYY-DD-MM"));
+  let currentYear= moment(new Date()).format('Y');
+
+//net worth calculation
+  let assetAccounts = [];
+  let liabilityAccounts = [];
+  let netWorth = 0;
+
+props.accounts.map(e => {
+  if(e.account_cat === 'Assets'){
+      return (
+          assetAccounts.push(e)
+      )
+  } else if(e.account_cat === 'Liabilities'){
+      return (
+          liabilityAccounts.push(e)
+      )
+  }
+})
+assetAccounts.map(e => {
+  return(
+      netWorth += e.currentAmount
+  )
+})
+liabilityAccounts.map(e => {
+  return(
+      netWorth -= e.currentAmount
+  )
+})
+
+
+  //net worth calculation
+
+
+
   let lofT = [];
   let eCatLabels = [];
   let iCatLabels = [];
   let eChartData = [];
   let iChartData = [];
-  let accountChartData = [];
-  let allExpenseTrForTheMonth = 0;
-  let allIncomeTrForTheMonth = [];
-  // console.log(Date.now(), 'moment date')
+  let accountChartData = [{
+    'label': 'net worth',
+    'data' :[ 0, 0, netWorth],
+    'backgroundColor': "#" + ((1<<24)*Math.random() | 0).toString(16)
+  }];
+
+
   props.transactions.map(e => {
     // console.log(moment(e.createdAt).isSame(new Date(), 'year') && );
     lofT.push(e);
@@ -58,19 +91,31 @@ const Index = (props) => {
         }
     })
   })
-  // console.log(iChartData);
 
-  //NetAssetChartData
 
-  props.transactions.map(e => {
-    if(e.entry === 'expense'){
-      let sumOfExpenses = 0;
-      sumOfExpenses += e.amount
-      allExpenseTrForTheMonth = sumOfExpenses
-    }
-  })
+ let allExpenseValues = [];
+ let allIncomeValues = [];
 
-  console.log(allExpenseTrForTheMonth)
+
+lofT.map(e => {
+  if(e.entry === 'expense'){
+    allExpenseValues.push(e.amount)
+  } else if( e.entry === 'income'){
+    allIncomeValues.push(e.amount)
+  }
+})
+
+let totalExpense = allExpenseValues.reduce((a, b) => a + b, 0);
+let totalIncome  = allIncomeValues.reduce((a, b) => a + b, 0);
+
+let netIncome = (totalIncome -  totalExpense)
+console.log(totalExpense, totalIncome,netIncome, 'expense and income values');
+
+  // console.log(allExpenseTrForTheMonth, allIncomeTrForTheMonth)
+ 
+
+
+
 
   props.accounts.map(e => {
    if(e.account_cat === 'Assets'){
@@ -107,7 +152,11 @@ const result1 = Object.values(iChartData.reduce((c, {name,count}) => {
   return c;
 }, {}));
 
-// console.log(lofT, 'loft');
+
+
+
+
+
 
   return (
     <div>
@@ -141,7 +190,7 @@ const result1 = Object.values(iChartData.reduce((c, {name,count}) => {
         <ExpensesCatChart result={result}/>
         <IncomeCatChart result1={result1}/>
         <AssetLiabilityChart accountChartData={accountChartData}/>
-        <NetAssetChart />
+        <NetIncomeChart totalExpense={totalExpense} totalIncome={totalIncome} netIncome={netIncome}/>
         
     </div>
   )
