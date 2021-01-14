@@ -7,17 +7,24 @@ import AssetLiabilityChart from '../src/components/charts/AssetLiabilityChart';
 import jwt from 'jsonwebtoken'; 
 import cookie from 'cookie';
 import db from '../src/firebase/firebase'
+import IncomeCatChart from '../src/components/charts/IncomeCatChart';
+import NetAssetChart from '../src/components/charts/NetAssetsChart';
 
 
 const Index = (props) => {
   let currentMonth = moment(new Date()).format('MMMM');
     let currentYear= moment(new Date()).format('Y');
-  // console.log(props);
+  console.log(props);
   // console.log(moment().startOf('month').format("YYYY-DD-MM"), "momee");
   // console.log(moment().endOf("month").format("YYYY-DD-MM"));
   let lofT = [];
   let eCatLabels = [];
-  let shoon = [];
+  let iCatLabels = [];
+  let eChartData = [];
+  let iChartData = [];
+  let accountChartData = [];
+  let allExpenseTrForTheMonth = 0;
+  let allIncomeTrForTheMonth = [];
   // console.log(Date.now(), 'moment date')
   props.transactions.map(e => {
     // console.log(moment(e.createdAt).isSame(new Date(), 'year') && );
@@ -26,30 +33,81 @@ const Index = (props) => {
   props.expenseCats.map(e => {
     eCatLabels.push(e.label);
   })
+  props.incomeCats.map(e => {
+    iCatLabels.push(e.label);
+  })
 
    eCatLabels.map((e,i) => {
     // console.log(e);
     props.transactions.map(t => {
-        if(t.category){
+        if(t.entry === 'expense'){
           if(t.category.label == e){
-            shoon.push({'name':e, 'count' : t.amount})
+            eChartData.push({'name':e, 'count' : t.amount})
           }
         }
     })
   })
 
- console.log(shoon,'shoon')
-// solution
+  iCatLabels.map((e,i) => {
+    // console.log(e);
+    props.transactions.map(t => {
+        if(t.entry === 'income'){
+          if(t.category.label == e){
+            iChartData.push({'name':e, 'count' : t.amount})
+          }
+        }
+    })
+  })
+  // console.log(iChartData);
 
-var result = Object.values(shoon.reduce((c, {name,count}) => {
+  //NetAssetChartData
+
+  props.transactions.map(e => {
+    if(e.entry === 'expense'){
+      let sumOfExpenses = 0;
+      sumOfExpenses += e.amount
+      allExpenseTrForTheMonth = sumOfExpenses
+    }
+  })
+
+  console.log(allExpenseTrForTheMonth)
+
+  props.accounts.map(e => {
+   if(e.account_cat === 'Assets'){
+     accountChartData.push({
+       'label': e.name,
+       'data' :[ e.currentAmount, 0],
+       'backgroundColor': "#" + ((1<<24)*Math.random() | 0).toString(16)
+     })
+   } else {
+    accountChartData.push({
+      'label': e.name ,
+      'data' :[ 0, e.currentAmount],
+      'backgroundColor': "#" + ((1<<24)*Math.random() | 0).toString(16)
+    })
+   }
+  // accountChartData.push({
+  //   'label': e.name,
+  //   'cat' : e.account_cat
+  // })
+  })
+
+  console.log(accountChartData, 'account data')
+
+const result = Object.values(eChartData.reduce((c, {name,count}) => {
   c[name] = c[name] || {name,count: 0};
   c[name].count += count;
   return c;
 }, {}));
 
-console.log(result);
 
+const result1 = Object.values(iChartData.reduce((c, {name,count}) => {
+  c[name] = c[name] || {name,count: 0};
+  c[name].count += count;
+  return c;
+}, {}));
 
+// console.log(lofT, 'loft');
 
   return (
     <div>
@@ -81,7 +139,9 @@ console.log(result);
         <button onClick={LogoutUser}>Log Out</button>
 
         <ExpensesCatChart result={result}/>
-        <AssetLiabilityChart />
+        <IncomeCatChart result1={result1}/>
+        <AssetLiabilityChart accountChartData={accountChartData}/>
+        <NetAssetChart />
         
     </div>
   )
@@ -97,7 +157,9 @@ export const getServerSideProps = async (context) => {
   }
 
   let userExpenseCategories = [];
+  let userIncomeCategories = [];
   let listOfTransactions = [];
+  let userAccounts = [];
 
   const dbreqExpense = await db.ref(`users/${decoded}/categories/expense`)
   .once('value')
@@ -105,6 +167,24 @@ export const getServerSideProps = async (context) => {
       .then((val) => {
         Object.keys(val).map((key) => {
           userExpenseCategories.push({
+            id: key,
+            ...val[key]
+          })
+        }
+        
+        );
+
+  })
+      .catch((e) => {
+      console.log('error fetching data', e)
+  })
+  
+  const dbreqIncome= await db.ref(`users/${decoded}/categories/income`)
+  .once('value')
+      .then((snapshot) => snapshot.val())
+      .then((val) => {
+        Object.keys(val).map((key) => {
+          userIncomeCategories.push({
             id: key,
             ...val[key]
           })
@@ -136,10 +216,32 @@ export const getServerSideProps = async (context) => {
   })
 
 
+
+  const dbreqAccounts = await db.ref(`users/${decoded}/accounts`)
+  .once('value')
+      .then((snapshot) => snapshot.val())
+      .then((val) => {
+        Object.keys(val).map((key) => {
+          userAccounts.push({
+            id: key,
+            ...val[key]
+          })
+        }
+        
+        );
+
+  })
+      .catch((e) => {
+      console.log('error fetching data', e)
+  })
+
+
   return {
     props : {
       expenseCats: [...userExpenseCategories],
-      transactions: [...listOfTransactions]
+      incomeCats:[...userIncomeCategories],
+      transactions: [...listOfTransactions],
+      accounts:[...userAccounts]
     }
   }
 

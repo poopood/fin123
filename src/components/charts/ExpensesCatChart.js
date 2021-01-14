@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Bar} from 'react-chartjs-2';
+import { Bar, Doughnut} from 'react-chartjs-2';
 
 
 const ExpensesCatChart = (props) => {
@@ -31,7 +31,7 @@ const ExpensesCatChart = (props) => {
 
     return(
         <div>
-            <h4>Hello from Chart</h4>
+            <h4>Hello from Expense Chart</h4>
             <Bar 
                 data={chartData}
                 options={{maintainAspectRatio: false}}

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import {  rmFromLib} from '../actions/TransactionsActions';
-
+import  Router from 'next/router';
 import moment from 'moment';
 import Link from 'next/link';
 import SearchInput, {createFilter} from 'react-search-input'
