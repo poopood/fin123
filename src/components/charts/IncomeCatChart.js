@@ -33,7 +33,7 @@ const IncomeCatChart = (props) => {
     return(
         <div>
             <h4>Hello from Income Chart</h4>
-            <Bar 
+            <Doughnut 
                 data={chartData}
                 options={{maintainAspectRatio: false}}
 
