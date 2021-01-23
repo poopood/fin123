@@ -1,5 +1,5 @@
 import {wrapper} from '../src/store/configureStore';
-import '../styles/globals.css';
+import '../styles/globals.scss';
 // import "react-datepicker/dist/react-datepicker.css";
 import 'react-dates/lib/css/_datepicker.css';
 

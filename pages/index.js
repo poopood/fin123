@@ -18,7 +18,7 @@ const Index = (props) => {
 //net worth calculation
   let assetAccounts = [];
   let liabilityAccounts = [];
-  let netWorth = 0;
+  let netWorth = 0;  
 
 props.accounts.map(e => {
   if(e.account_cat === 'Assets'){
