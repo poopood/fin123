@@ -54,3 +54,17 @@
 // }
 
 // export default test;
+// import '../styles/pages/_bj.scss';
+
+
+const test = () => {
+    return(
+
+        <div className="test-me-now">
+            <h2>Hello GG</h2>
+        </div>
+    )
+}
+
+
+export default test;
