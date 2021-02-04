@@ -42,7 +42,7 @@ const startSignInUser = ({email, password} = {}) => {
             Cookies.set("userId", uidToken)
           
             setTimeout(() => {
-                Router.push('/')
+                Router.push('/dashboard')
             }, 1000 )
             
             })

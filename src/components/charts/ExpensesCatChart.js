@@ -35,6 +35,7 @@ const ExpensesCatChart = (props) => {
             <Doughnut 
                 data={chartData}
                 options={{maintainAspectRatio: false}}
+                
 
             />
         </div>

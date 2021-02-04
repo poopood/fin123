@@ -1,0 +1,520 @@
+
+// .landingPage{
+//     display: grid;
+//     // grid-template-columns: 1fr 1fr;
+//     grid-template-rows: 1fr 8fr;
+//     .logo{
+//         // display: inline-block;
+//         // height: 44px;
+//         // margin-top: .4rem;
+
+//         display: flex;
+//         height: 44px;
+//         justify-content: flex-end;
+//         // place-items: start end;
+//         margin-top: 1.5rem;
+//     }
+//     height: 100%;
+    
+// }
+
+// .landingPage {
+//     .nav .logo h1  {
+//         // background: url(/images/Logo_finnikky.png) no-repeat;
+//         // text-indent: -600rem;
+//         // width: 30rem;
+//     }
+//     .nav-content{
+//         width: 1440px;
+//         margin:0 auto;
+//     }
+// }
+
+// .landingPage .nav {
+    
+//     // grid-template-columns: 1fr 4fr;
+//     max-width: 1440px;
+//     display: flex;   
+    
+//     justify-content: space-between;
+    
+// }
+
+// .landingPage .accountButtons {
+//     display: flex;
+//     justify-content: flex-end;
+//     // margin-top: 1.5rem;
+//     // width: 30rem;
+// }
+
+
+// // .signUp {
+// //     margin-right: 3rem;
+// // }
+
+// .landingPage_body{
+//     // background: #EFFFFE;
+// // background: linear-gradient(#ffffff, #00FF00);
+//     // height:88.5vh;  
+//     background-color: #fff;
+// background-image:
+// // linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+// linear-gradient(#eee .1em, transparent .1em);
+// background-size: 100% 1.2em;
+// }
+
+// .login ,.signUp {
+// //    display: inline-block;
+//    height: 40px;
+//    width: 133px;
+//    border: 1px solid #000000;
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    margin-top: 1.5rem;
+//    margin-right: 1rem;
+//    font-weight:600;
+// //    font-size: 1rem;
+// }
+
+// .signUp {
+//     background: #00CDA9;
+//     color: #ffffff;
+//     border: 1px solid #00CDA9;
+// }
+
+// .landingPage_content{
+//     max-width: 1440px;
+//     margin: 0 auto;
+//     display: grid;
+//     place-items: center;
+//     grid-template-columns: 1fr 1.5fr;
+    
+//     .oneline_pitch p{
+//         width: 30rem;
+//        font-size: 1.75rem;
+// //   background: -webkit-linear-gradient(to right, #000000, #12FFD5);
+//   background: linear-gradient(to right, #000000, #00CDA9 70%);
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: transparent;
+//   font-weight: 600;
+
+//     }
+//     .sales_pitch{
+//         max-width: 1440px;
+//     }
+
+//     .sentence_pitch{
+//         // font-weight: 600;
+//         font-size: 1.25rem;
+//         width: 30rem;
+//     }
+
+//     .join_now_btn{
+//         height: 40px;
+//    width: 133px;
+//    border: 1px solid #000000;
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    margin-top: 1.5rem;
+//    margin-right: 1rem;
+//    font-weight:600;
+//    background: #00CDA9;
+//     color: #ffffff;
+//     border: 1px solid #00CDA9;
+//     position: relative;
+
+//     &::after{
+//         content: url('/images/free-quote.png');
+//         position:absolute;
+//         top: -8rem;
+//         left: 5.5rem;
+//     }
+//     }
+
+// }
+
+// .landingPage {
+//     display: grid;
+//     grid-template-areas:
+//     "nav nav nav"
+//     "body body body";
+//     grid-template-rows: 5rem 90vh;
+// }
+
+// .nav-content{
+//     grid-area: nav;
+// }
+
+// .landingPage_body{
+//     grid-area: body;
+// }
+
+// .nav-content{
+//     grid-template-area: 
+//     "logo logo logo"
+//     "accountButtons";
+
+//     .logo{
+//         grid-area: logo;
+//     }
+
+
+//     .accountButtons{
+//         grid-area: accountButtons;
+//     }
+// }
+
+// .landingPage_body{
+//     grid-template-area: 
+//     "cont cont cont"
+//     "illustration illustration";
+
+//         .landingPage_content{
+//             grid-area: cont;
+//         }
+//         .cool-illustration{
+//             grid-area: illustration;
+//         }
+
+
+     
+
+// }
+
+//======///
+
+
+.landingPage{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 80px auto;
+    grid-template-areas: 
+    "n n n n n n"
+    "b b b b b b"
+    ;
+    @include media("<=phone"){
+         grid-template-rows: 150px auto;
+      
+    }
+    @include media(">=425px", "<=768px"){
+        grid-template-rows: 90px auto;
+    }
+
+    @include media(">=768px", "<=1024px"){
+        grid-template-rows: 100px auto;
+    }
+
+    @include media(">=1024px", "<=1200px"){
+
+    }
+
+    .nav-content{
+        grid-area: n;
+    }
+
+    .landingPage_body{
+        grid-area: b;
+    }
+}
+
+.landingPage {
+
+    .nav-content{
+        max-width: 1440px;
+        margin: 0 auto;
+
+        align-self: center;
+
+    }
+
+    .nav{
+        max-width: 1440px;
+        display: grid;
+        margin: 0 auto;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas: 
+        ". l l . . . . . ab ab ab";
+
+        @include media(">phone", "<=425px"){
+                grid-template-areas: 
+                 "l . . .  ab .";
+              }
+        @include media(">=425px", "<=768px"){ 
+            grid-template-columns: repeat(12, 1fr);
+           grid-template-areas: 
+                 " . l l . . . . ab  ab ab";
+
+        }
+        @include media(">=768px", "<=1024px"){
+                grid-template-columns: repeat(12, 1fr);
+                grid-template-areas: 
+                 ". l l . . . . . ab ab ab ab";
+        }
+        
+        ;
+
+            .logo{
+                grid-area: l;
+                background-image: url('/images/Logo_finnikky.png');
+                
+                 background-repeat:no-repeat;
+                width: 192px;
+                height: 44px;
+                 @include media(">phone", "<=425px"){
+                    width: 50px;
+                    height: 44px;
+                    margin-top:.5rem;
+                     background-image: url('/images/small_logo.png');
+                    background-repeat:no-repeat;
+              }
+
+
+                     @include media(">=425px", "<=768px"){ 
+                         width: 50px;
+                    height: 44px;
+                    margin-top:.5rem;
+                     background-image: url('/images/small_logo.png');
+                    background-repeat:no-repeat;
+                        // margin-top:.5rem;
+                     }
+            }
+            .accountButtons {
+                grid-area: ab;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-self: center;
+
+
+                .login, .signUp{
+                    display: grid;
+                       height: 40px;
+                       width: 133px;
+                       border: 1px solid #000000;
+                       place-items: center;
+                       font-weight: 600;
+                       cursor: pointer;
+                       @include media(">phone", "<=425px"){
+                        height: 30px;
+                       width: 80px;
+                       margin-left: 1rem;
+                       }
+
+                        @include media(">=425px", "<=768px"){ 
+                             height: 30px;
+                       width: 100px;
+                       margin-left: 3rem;
+                        }
+                        @include media(">=768px", "<=1024px"){
+                            height: 40px;
+                       width: 110px;
+                       margin-left: 3rem;
+                        }
+
+                       
+
+                        a{
+                            color: #000000;
+
+                            &:hover{
+                                text-decoration: underline ;
+                            }
+                        }
+
+                        &:hover{
+                            background: #F4F5F8;
+                        }
+                }
+
+
+                .signUp{
+                    background: $mainColor;
+                    border: 1px solid $mainColor;
+                    transition: all 0.2s ease;
+
+                    @include media(">=425px", "<=768px"){ 
+                             height: 30px;
+                       width: 100px;
+                       margin-left: 3rem;
+                        }
+                    
+                        a{
+                            color: #ffffff;
+                           
+                        }
+
+                        &:hover{
+                            background: darken($mainColor, 10%);
+                            border: 1px solid darken($mainColor, 10%);
+                        }
+                }
+            }
+    }
+}
+
+.landingPage_body{
+        background-color: #fff;
+background-image:
+// linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+linear-gradient(#eee .1em, transparent .1em);
+background-size: 100% 1.2em;
+
+    @include media("<=phone"){
+      
+    }
+
+    @include media(">phone", "<=425px"){
+
+    }
+    @include media(">=425px", "<=768px"){
+
+    }
+}
+.landingPage_content{
+    max-width: 1440px;
+    
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 90vh;
+   
+    place-items: start;
+    
+    @include media(">phone", "<=425px"){
+        grid-template-columns: 1fr;
+        margin: 1rem;
+        background-image: url('/images/cool_illustration.png');
+         background-size: 405px auto;
+        background-repeat: no-repeat;
+        margin-top: 3.5rem; 
+    }
+     @include media(">=425px", "<=768px"){ 
+         max-width: 35rem;
+         margin: 0 auto;
+        grid-template-columns: 1fr;
+   
+        background-image: url('/images/cool_illustration.png');
+         background-size: 555px auto;
+         background-position: right -20px;
+        background-repeat: no-repeat;
+        margin-top: 3.5rem; 
+        align-content: center;
+     }
+
+      @include media(">=768px", "<=1024px"){
+          
+
+      }
+    
+
+    
+
+    .sales_pitch{
+        display: grid;
+        grid-column: 2/3; 
+         margin-top: 10rem;
+        // place-items: center;
+        justify-self: end;
+
+         
+    @include media(">phone", "<=425px"){
+            margin-top: 5rem; 
+            place-items: center; 
+             justify-self: center;
+      }
+
+       @include media(">=425px", "<=768px"){
+           
+            margin-top: 5rem; 
+            place-items: center; 
+             justify-self: center;
+       }
+
+      
+
+
+            .oneline_pitch{
+                width: 20rem;
+             font-size: 1.30rem;
+                //   background: -webkit-linear-gradient(to right, #000000, #12FFD5);
+             background: linear-gradient(to right, #000000, #00CDA9 70%);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+                font-weight: 800;
+               
+            }
+
+            .sentence_pitch{
+                font-size: 1.2rem;
+                margin-top: -.6rem;
+                line-height: 1.3rem;
+                word-spacing: .3rem;
+            }
+
+            .join_now_btn{
+                 display: grid;
+                       height: 40px;
+                       width: 133px;
+                       border: 1px solid #000000;
+                       place-items: center;
+                       font-weight: 600;
+                       cursor: pointer;
+                       background: $mainColor;
+                        border: 1px solid $mainColor;
+                         transition: all 0.2s ease;
+                         margin-top: 3rem;
+                         position: relative;
+
+                        a{
+                           color: #ffffff;
+
+                            &:hover{
+                                text-decoration: underline ;
+                            }
+                        }
+
+                        &:hover{
+                           background: darken($mainColor, 10%);
+                            border: 1px solid darken($mainColor, 10%);
+                        }
+
+                            &::after{
+                            content: url('/images/free-quote.png');
+                            position:absolute;
+                            top: -8.2rem;
+                            left: 6rem;
+
+                            @include media(">phone", "<=425px"){
+                                        display:none;
+                                    }
+
+                             @include media(">=425px", "<=768px"){ 
+                                    display:none;
+                             }
+                            
+                            }
+                
+            }
+       
+    }
+
+    .cool_illustration{
+         display: end;
+      grid-column: 3/ -1; 
+       margin-top: 3rem;
+    // place-items: start;
+    // justify-content: end;
+    justify-self: center;
+    @include media(">phone", "<=425px"){
+        display:none;
+    }
+    @include media(">=425px", "<=768px"){ 
+        display:none;
+    }
+    
+
+                
+}
+}
