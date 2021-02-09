@@ -1,3 +1,186 @@
-body{
-    color: green;
-}
+
+// .landingPage{
+//     display: grid;
+//     // grid-template-columns: 1fr 1fr;
+//     grid-template-rows: 1fr 8fr;
+//     .logo{
+//         // display: inline-block;
+//         // height: 44px;
+//         // margin-top: .4rem;
+
+//         display: flex;
+//         height: 44px;
+//         justify-content: flex-end;
+//         // place-items: start end;
+//         margin-top: 1.5rem;
+//     }
+//     height: 100%;
+    
+// }
+
+// .landingPage {
+//     .nav .logo h1  {
+//         // background: url(/images/Logo_finnikky.png) no-repeat;
+//         // text-indent: -600rem;
+//         // width: 30rem;
+//     }
+//     .nav-content{
+//         width: 1440px;
+//         margin:0 auto;
+//     }
+// }
+
+// .landingPage .nav {
+    
+//     // grid-template-columns: 1fr 4fr;
+//     max-width: 1440px;
+//     display: flex;   
+    
+//     justify-content: space-between;
+    
+// }
+
+// .landingPage .accountButtons {
+//     display: flex;
+//     justify-content: flex-end;
+//     // margin-top: 1.5rem;
+//     // width: 30rem;
+// }
+
+
+// // .signUp {
+// //     margin-right: 3rem;
+// // }
+
+// .landingPage_body{
+//     // background: #EFFFFE;
+// // background: linear-gradient(#ffffff, #00FF00);
+//     // height:88.5vh;  
+//     background-color: #fff;
+// background-image:
+// // linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+// linear-gradient(#eee .1em, transparent .1em);
+// background-size: 100% 1.2em;
+// }
+
+// .login ,.signUp {
+// //    display: inline-block;
+//    height: 40px;
+//    width: 133px;
+//    border: 1px solid #000000;
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    margin-top: 1.5rem;
+//    margin-right: 1rem;
+//    font-weight:600;
+// //    font-size: 1rem;
+// }
+
+// .signUp {
+//     background: #00CDA9;
+//     color: #ffffff;
+//     border: 1px solid #00CDA9;
+// }
+
+// .landingPage_content{
+//     max-width: 1440px;
+//     margin: 0 auto;
+//     display: grid;
+//     place-items: center;
+//     grid-template-columns: 1fr 1.5fr;
+    
+//     .oneline_pitch p{
+//         width: 30rem;
+//        font-size: 1.75rem;
+// //   background: -webkit-linear-gradient(to right, #000000, #12FFD5);
+//   background: linear-gradient(to right, #000000, #00CDA9 70%);
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: transparent;
+//   font-weight: 600;
+
+//     }
+//     .sales_pitch{
+//         max-width: 1440px;
+//     }
+
+//     .sentence_pitch{
+//         // font-weight: 600;
+//         font-size: 1.25rem;
+//         width: 30rem;
+//     }
+
+//     .join_now_btn{
+//         height: 40px;
+//    width: 133px;
+//    border: 1px solid #000000;
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    margin-top: 1.5rem;
+//    margin-right: 1rem;
+//    font-weight:600;
+//    background: #00CDA9;
+//     color: #ffffff;
+//     border: 1px solid #00CDA9;
+//     position: relative;
+
+//     &::after{
+//         content: url('/images/free-quote.png');
+//         position:absolute;
+//         top: -8rem;
+//         left: 5.5rem;
+//     }
+//     }
+
+// }
+
+// .landingPage {
+//     display: grid;
+//     grid-template-areas:
+//     "nav nav nav"
+//     "body body body";
+//     grid-template-rows: 5rem 90vh;
+// }
+
+// .nav-content{
+//     grid-area: nav;
+// }
+
+// .landingPage_body{
+//     grid-area: body;
+// }
+
+// .nav-content{
+//     grid-template-area: 
+//     "logo logo logo"
+//     "accountButtons";
+
+//     .logo{
+//         grid-area: logo;
+//     }
+
+
+//     .accountButtons{
+//         grid-area: accountButtons;
+//     }
+// }
+
+// .landingPage_body{
+//     grid-template-area: 
+//     "cont cont cont"
+//     "illustration illustration";
+
+//         .landingPage_content{
+//             grid-area: cont;
+//         }
+//         .cool-illustration{
+//             grid-area: illustration;
+//         }
+
+
+     
+
+// }
+
+//======///

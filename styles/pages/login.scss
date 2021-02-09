@@ -1,0 +1,14 @@
+.login_body{
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    height: 95vh;
+    margin-top: -5rem;
+}
+
+.login_form{
+    border: 1px solid black;
+}

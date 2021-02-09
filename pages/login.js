@@ -25,8 +25,12 @@ const Login = (props) => {
     }
 
     return(
-        <div>
+        <div className="login_body">
+            <div className="login_form">
             <h3>Login</h3>
+             <div className="logo">
+             
+             </div>
             <form onSubmit={handleSubmit(formData)}>
                 <label htmlFor="email">
                     <p>Enter Your Email</p>
@@ -43,6 +47,7 @@ const Login = (props) => {
             <Link href="/signup">
                 <a>Dont have an Account</a>
             </Link>
+            </div>
         </div>
     )
 }
