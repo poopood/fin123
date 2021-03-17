@@ -9,8 +9,8 @@ const AssetLiabilityChart = (props) => {
     })
 
     return(
-        <div>
-            <h4>Hello from Accounts chart</h4>
+        <div id="chart-asset-liability">
+            <p>Accounts chart</p>
             <Bar
                 data={chartData}
                 options={{

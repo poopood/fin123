@@ -9,4 +9,14 @@ module.exports = {
         db_appId: "1:751763113401:web:0b5a4f537eb89f7615e268",
         db_measurementId: "G-1RP62DBYJB"
     },
+    webpack: (config, { isServer }) => {
+        // Fixes npm packages that depend on `fs` module
+        if (!isServer) {
+          config.node = {
+            fs: 'empty'
+          }
+        }
+    
+        return config
+      }
   }

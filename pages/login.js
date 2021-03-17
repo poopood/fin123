@@ -27,25 +27,24 @@ const Login = (props) => {
     return(
         <div className="login_body">
             <div className="login_form">
-            <h3>Login</h3>
              <div className="logo">
              
              </div>
             <form onSubmit={handleSubmit(formData)}>
                 <label htmlFor="email">
-                    <p>Enter Your Email</p>
+                    <p> &nbsp;  Email Address</p>
                     <input type="email" name="email" ref={register}/>
                 </label>
                 <label htmlFor="password">
-                    <p>Enter Your password</p>
-                    <input type="password" name="password" ref={register}/>
+                    <p>&nbsp;  Password</p>
+                    <input  type="password"  name="password" ref={register}/>
                 </label>
                 <br/>
-                <button type="submit">Submit</button>
+                <button type="submit" className="submit_btn">Log in</button>
             </form>
             <p>{error}</p>
             <Link href="/signup">
-                <a>Dont have an Account</a>
+                <span>Don't have an account? <a>Sign up</a></span>
             </Link>
             </div>
         </div>

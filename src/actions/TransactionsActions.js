@@ -398,7 +398,7 @@ const rmFromLib = (e) => {
 
         db.ref(`users/${decoded}/transactions`).child(id).remove().then(() => {
             dispatch(removeTransaction(id));
-            Router.push('/')
+            Router.push('/transactions')
 
         })
     }

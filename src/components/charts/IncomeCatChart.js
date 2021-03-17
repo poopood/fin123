@@ -31,8 +31,8 @@ const IncomeCatChart = (props) => {
 
 
     return(
-        <div>
-            <h4>Hello from Income Chart</h4>
+        <div id="chart-income">
+            <p>Income by Categories breakdown</p>
             <Doughnut 
                 data={chartData}
                 options={{maintainAspectRatio: false}}

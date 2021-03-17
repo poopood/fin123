@@ -1,4 +1,4 @@
-.login_body{
+.login_body,.signup_body{
     max-width: 1440px;
     margin: auto;
     display: flex;
@@ -7,8 +7,111 @@
     align-items: center;
     height: 95vh;
     margin-top: -5rem;
+
+    @include media(">phone"){
+        margin-top: -1rem;
+    }
+
+    // &::after{
+    //     content:url('/images/formbg.png');
+    //     position: absolute;
+    //     top: 4rem;
+    //     // background-size: contain;
+    //     transform: scale(.99);
+    //     z-index: -1;
+
+    //     @include media("<=800px"){
+    //         top: 1rem;
+    //         transform: scale(.89);
+    //     }
+    // }
 }
 
-.login_form{
+.login_form, .signup_form{
     border: 1px solid black;
+    padding: 6rem 3rem;
+    position: relative;
+    z-index: 999;
+    background-color: white;
+   
+
+    p{
+        margin: 0;
+        padding: 0;
+    }
+
+    @include media("<=phone"){
+        padding: 2rem 1rem;
+    }
+
 }
+
+.logo{
+   background-image: url('/images/Logo_finnikky.png');
+                
+                 background-repeat:no-repeat;
+                width: 192px;
+                height: 44px;
+                margin-bottom: 1.5rem;
+}
+
+.login_form,.signup_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    a{
+        cursor: pointer;
+       &:hover{
+        text-decoration: underline;
+       }
+    }
+
+    p{
+        margin: 1.5rem 0;
+       
+    }
+
+    p, span{
+        color: grey;
+        
+    }
+    input{
+        display: block;
+        width: 20rem;
+        height: 3.5rem;
+        // margin-top: 2.5rem; 
+        
+
+        
+       
+    }
+    
+    
+   .submit_btn, .submit_btn_signup{
+       width: 9rem;
+     display: block;
+     margin: 0 auto;
+     padding: 9px;
+     background-color: #00CDA9;
+     border: none;
+     color: #ffffff;
+     font-weight: 600;
+     font-size: .96rem;
+    cursor: pointer;
+    margin-top: 2rem;
+   }
+}
+
+
+
+.signup_form{
+    padding-top: 3rem;
+    padding-bottom:3rem ;
+
+
+    span{
+        margin-top: 1.5rem;
+    }
+
+}
+

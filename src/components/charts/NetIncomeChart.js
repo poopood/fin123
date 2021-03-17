@@ -15,8 +15,8 @@ const NetIncomeChart = (props) => {
         }]
     })
     return(
-        <div>
-            <h4>Hello from Net Income Chart</h4>
+        <div id="chart-net-income">
+            <p>Net Income Chart</p>
             <HorizontalBar
             data={chartData}
             options={{

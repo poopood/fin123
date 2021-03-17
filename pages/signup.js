@@ -24,6 +24,10 @@ const SignUp = (props) => {
         //create an action here for the sign up and the subsequent adding of default accounts
         auth.createUserWithEmailAndPassword(email, password)
             .then((cred) => {
+                const uuser = auth.currentUser;
+                uuser.updateProfile({
+                    displayName: name
+                  })
                 const {uid } = cred.user;
                 props.dispatch(startAddUser({
                     name,email,password,uid
@@ -56,9 +60,11 @@ const SignUp = (props) => {
     }
 
     return(
-        <div>
-            Hello from Sign Up
-            <h3>Sign Up</h3>
+        <div className="signup_body">
+            <div className="signup_form">
+            <div className="logo">
+             
+            </div>
             <form onSubmit={handleSubmit(formData)}>
                 <label htmlFor="name">
                     <p> Enter Your Name</p>
@@ -69,17 +75,20 @@ const SignUp = (props) => {
                     <input type="email" name="email" ref={register}/>
                 </label>
                 <label htmlFor="password">
-                    <p>Enter Your password</p>
+                    <p>Enter a password</p>
                     <input type="password" name="password" ref={register}/>
                 </label>
                 <br/>
-                <button type="submit">Submit</button>
+                <button className="submit_btn_signup" type="submit">Submit</button>
             </form>
-            <p>{error}</p>
-            <p>{message}</p>
-            <Link href="/">
-                <a >Back to the Future</a>
+            
+        
+            {error && <p>{error}</p>}
+            {message && <p>{message}</p>}
+            <Link href="/login">
+            <span>already have an account? <a>Sign in</a></span>
             </Link>
+            </div>
         </div>
     )
 }

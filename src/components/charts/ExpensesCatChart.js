@@ -13,6 +13,8 @@ const ExpensesCatChart = (props) => {
     console.log(eCats, eCatCount)
     const [chartData, setchartData] = useState({
         labels:eCats,
+        responsive: true,
+    maintainAspectRatio: false,
         datasets:[
             {label: 'Expense Total by Category for the current month',
                 data:eCatCount,
@@ -30,8 +32,8 @@ const ExpensesCatChart = (props) => {
 
 
     return(
-        <div>
-            <h4>Hello from Expense Chart</h4>
+        <div id="chart-expense">
+            <p> Expenses by Categories Breakdown</p>
             <Doughnut 
                 data={chartData}
                 options={{maintainAspectRatio: false}}

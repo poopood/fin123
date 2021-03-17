@@ -92,6 +92,7 @@
                  background-repeat:no-repeat;
                 width: 192px;
                 height: 44px;
+                margin-bottom: 0 !important;
                  @include media(">phone", "<=425px"){
                     width: 50px;
                     height: 44px;

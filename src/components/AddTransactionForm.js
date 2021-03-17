@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
@@ -10,10 +10,17 @@ import moment from 'moment';
 import 'react-dates/initialize';
 import {SingleDatePicker} from 'react-dates';
 import NumberFormat from "react-number-format";
+import Navigation from '../components/Navigation';
+
 
 import Link from "next/link";
 
 const AddTransactionForm = (props) => {
+   
+
+
+
+    
 
     const groupStyles = {
         display: 'flex',
@@ -145,9 +152,12 @@ const AddTransactionForm = (props) => {
 
     
     return(
-        <div className="transaction-app">
+        <div>
+        <Navigation />
+        <div className="add-transaction-form">
             <form onSubmit={handleSubmit(formData)}>
-            <label> Transaction Name &nbsp;<span />
+            <h3>Add Transaction</h3>
+            <label htmlFor="name"> Transaction Name &nbsp;<span /> </label> 
             <input 
             type="text"
             name="name"
@@ -156,8 +166,8 @@ const AddTransactionForm = (props) => {
             </span>}
             {errors.name && errors.name.type === 'minLength' && <span>Length of name should be atleast 5 charactors
             </span>}
-            </label> 
-                <br/><br/>
+            
+                
 
             
             <section>
@@ -176,10 +186,11 @@ const AddTransactionForm = (props) => {
             {errors.amount && <p>please enter amount</p>}
             
           </section>
-          <br/>
+          
           <section>
-                <label> Description &nbsp;<span />
-                <br/>
+                <label> Description</label> 
+            <span />
+                
                 <input 
                 name="description"
                 type="text"
@@ -187,12 +198,12 @@ const AddTransactionForm = (props) => {
                 defaultValue={''}
                 ref={register}
                  />
-                </label> 
-                    <br/>
+                
+                   
           </section>
             
 
-            <h3>Pick a Date</h3>
+            <p>Pick a Date</p>
             <section>
         
             <SingleDatePicker
@@ -207,6 +218,13 @@ const AddTransactionForm = (props) => {
                  id="dates" // PropTypes.string.isRequired,
                 //  isOutsideRange={() => false}
                  isOutsideRange={date => date.isBefore(minDate) || date.isAfter(maxDate)}
+                 withPortal={true}
+             
+                 readOnly
+                verticalHeight={370}
+                orientation="vertical"
+                numberOfMonths={2}
+                
                  />
             </section>
     
@@ -312,11 +330,15 @@ const AddTransactionForm = (props) => {
             />
             {errors.account && <p>please select an Account</p>}
                 
+            <div className="button-container">
+               
             <button 
             type="submit"
-            name="submit" 
+            name="submit"
+            className="submit" 
             disabled={errors.name}
-            >submit</button>
+            >Add Transaction</button>
+            </div>
             
             </form> 
             <div>
@@ -325,6 +347,7 @@ const AddTransactionForm = (props) => {
             {message && message}
 
 		</div> 
+        </div>
 
     )
 }

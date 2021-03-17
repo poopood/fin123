@@ -1,6 +1,7 @@
-import Link from 'next/link';
+// import React,{useState, useEffect, useRef} from 'react';
+// import Link from 'next/link';
 import { connect } from 'react-redux';
-import {LogoutUser} from '../src/actions/UserActions';
+// import {LogoutUser} from '../src/actions/UserActions';
 import moment, { now } from 'moment';
 import ExpensesCatChart from '../src/components/charts/ExpensesCatChart';
 import AssetLiabilityChart from '../src/components/charts/AssetLiabilityChart';
@@ -9,15 +10,35 @@ import cookie from 'cookie';
 import db from '../src/firebase/firebase'
 import IncomeCatChart from '../src/components/charts/IncomeCatChart';
 import NetIncomeChart from '../src/components/charts/NetIncomeChart';
+// import {useSpring, animated} from 'react-spring';
+// import {ClickOutside} from "reactjs-click-outside";
+import Example from '../src/components/SideMenu';
+import ModalExample from '../src/components/ModalPop';
+// import {FaPlus} from 'react-icons/fa';
+// import FloatingButton from '../src/components/FloatingButton';
+import Navigation from '../src/components/Navigation';
+
+
+
+
 // import firebase from '../src/firebase/firebase'
 
 
 const Dashboard = (props) => {
+  // const [showM, setShowM] = useState(false);
+  // const [drop, setDrop] = useState(false);
+  // const [add, setAdd] = useState(false);
+  
+
+ 
+  
 
 
 
-  let currentMonth = moment(new Date()).format('MMMM');
-  let currentYear= moment(new Date()).format('Y');
+  
+  
+  // let currentMonth = moment(new Date()).format('MMMM');
+  // let currentYear = moment(new Date()).format('Y');
 
 //net worth calculation
   let assetAccounts = [];
@@ -157,56 +178,92 @@ const result1 = Object.values(iChartData.reduce((c, {name,count}) => {
 }, {}));
 
 
-
-
-
-
+  const passablefunc = () => {
+   
+  }
 
   return (
-    <div>
-        <h2>Hi</h2>        
-        <Link href="/add-transaction">
-          <a>Add Transaction</a>
-        </Link>
-        <br/>
-        <Link href="/add-account">
-          <a>Add Account</a>
-        </Link>
-        <br/>
-        <Link href="/accounts">
-          <a>Accounts</a>
-        </Link>
-        <br/>
-        <Link href="/login">
-          <a>Log In</a>
-        </Link>
-        <br/><br/>
-        <Link href="/transactions">
-          <a>Transactions</a>
-        </Link>
-        <br/>
-        <br/>
-        <Link href={`/budget/${currentYear}/${currentMonth}`}>
-          <a>Budgeting</a>
-        </Link>
-        <button onClick={LogoutUser}>Log Out</button>
+    <div className="outer-container">
+    
+      
+        <Navigation />
+      
+        <div className="dash_body_content">
+        <div id="cool-data">
+          <div className="data-card" title="FEB" >
+          <img src="/images/expense.png" alt=""/>
+          
+            <p  >Total Expenses (Feb)</p>
+             
+           
+            <p>$2500</p>
+            
+            
+            
+            
+          </div>
+          <div className="data-card" title="for the month of February" >
+          <img src="/images/income.png" alt=""/>
+            <p>Total Income (Feb) </p>
+         
+           
+            <p>$3300</p>
+            
+          </div>
+          <div className="data-card" title="'12/21">
+          <img src="/images/receiver.png" alt=""/>
+            <p>Total Assets (02/21) </p>
+            
+            <p>$300</p>
+            
+          </div>
+          <div className="data-card" title="'12/21">
+          <img src="/images/expense.png" alt=""/>
+            <p>Total Liabilities  (02/21) </p>
+           
+            <p>$3500</p>
+            
+          </div>
+         
+        </div>
 
+       
+        <div id="charts">
+        <div className="chart chart1">
         <ExpensesCatChart result={result}/>
+        </div>
+        <div className="chart chart2">
         <IncomeCatChart result1={result1}/>
+        </div>
+        <div className="chart chart3">
         <AssetLiabilityChart accountChartData={accountChartData}/>
+        </div>
+        <div className="chart chart4">
         <NetIncomeChart totalExpense={totalExpense} totalIncome={totalIncome} netIncome={netIncome}/>
+        </div>
+         <ModalExample />
+        </div>
+      
         
+
+      
+        
+    </div>
+    
     </div>
   )
 }
 
 
 export const getServerSideProps = async (context) => {
+  // var userName = localStorage.getItem('userN');
 
-  let decoded = 'dGZZ2xH3toXlfGU2W2F5iifEkMJ3'
+  let decoded = 'dGZZ2xH3toXlfGU2W2F5iifEkMJ3';
+ 
   if(context.req.headers.cookie){
     const parsedCookies = cookie.parse(context.req.headers.cookie)
     decoded = jwt.decode(parsedCookies.userId, { header: true })
+
   }
 
   let userExpenseCategories = [];
@@ -231,6 +288,13 @@ export const getServerSideProps = async (context) => {
       .catch((e) => {
       console.log('error fetching data', e)
   })
+
+//////
+
+
+
+//////
+
   
   const dbreqIncome= await db.ref(`users/${decoded}/categories/income`)
   .once('value')

@@ -12,7 +12,7 @@ const AddTransactionPage = (props) => {
  
     return(
         <div>
-            Hello from Add Transaction Page
+            
             <AddTransactionForm accounts={props.accounts} expenseCats={props.expenseCats} incomeCats={props.incomeCats}/>
         </div>
     )

@@ -38,8 +38,11 @@ const startSignInUser = ({email, password} = {}) => {
             .then((cred) => {
             dispatch(SignInUser(cred.user.uid))
             localStorage.setItem('User', JSON.stringify(cred.user.uid));
+
             const uidToken= jwt.sign(cred.user.uid, 'shhhhh');
-            Cookies.set("userId", uidToken)
+
+            Cookies.set("userId", uidToken);
+           
           
             setTimeout(() => {
                 Router.push('/dashboard')

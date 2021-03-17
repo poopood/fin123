@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import jwt from 'jsonwebtoken'; 
 import cookie from 'cookie';
 import Transactions from '../src/components/Transactions';
+import Navigation from '../src/components/Navigation';
+
 
 
 const TransactionsPage = (props) => {
+  
+  
     return(
-        <div>
-            <p>Hello from Transactions Page</p>
-            <Transactions TList={props.transactions}/>
+        <div className="outer-container">
+          <Navigation />
+          <div className="transaction-page-content">
+              
+              <Transactions TList={props.transactions}/>
+          </div>
+            
         </div>
     )
 }

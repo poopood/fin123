@@ -1,9 +1,10 @@
 const { default: AddAccountForm } = require("../src/components/AddAccountForm")
+import Navigation from '../src/components/Navigation';
 
 const AddAccount = () => {
     return(
         <div>
-            <h1>Hello From Add Account</h1>
+            <Navigation />
             <AddAccountForm />
         </div>
     )

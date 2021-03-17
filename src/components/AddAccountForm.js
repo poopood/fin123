@@ -40,17 +40,19 @@ const AddAccountForm = (props) => {
     }
 
     return(
+        <div className="add-account-form">
         <form onSubmit={handleSubmit(formData)}>
-        <label> Account Name &nbsp;<span />
+        <h3>Add Account  </h3>
+        <label> Account Name &nbsp;<span /></label> 
             <input 
             type="text"
-            name="name"
+            name="name" 
             ref={register({required: true, minLength: 5})} />
             {errors.name && errors.name.type === 'required' && <span>this is required 
             </span>}
             {errors.name && errors.name.type === 'minLength' && <span>Length of name should be atleast 5 charactors
             </span>}
-            </label> 
+            
             <br/><br/>
             
             <section>
@@ -73,11 +75,11 @@ const AddAccountForm = (props) => {
                 name="currency"
                 as={Select}
                 options={[
-                { value: "USD", label: "USD" },
-                { value: "CAD", label: "CAD" },
-                { value: "EUR", label: "EUR" }
+               
+                { value: "CAD", label: "CAD" }
+               
                 ]}
-                defaultValue={[{value:"USD", label:"USD"}]}
+                defaultValue={[{value:"CAD", label:"CAD"}]}
                 control={control}
                 rules={{ required: true }}
             />
@@ -90,13 +92,17 @@ const AddAccountForm = (props) => {
                 rules={{ required: true }}
             />
             <br/>
+            <div className="button-container" >
             <button 
             type="submit"
             name="submit" 
+            className="submit" 
             disabled={errors.name}
-            >submit</button>
+            >Add Account</button>
+            </div>
             {message && message}
         </form>
+        </div>
         
     )
 }

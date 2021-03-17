@@ -3,6 +3,8 @@ import db from '../src/firebase/firebase';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import { connect } from 'react-redux';  
+import Navigation from '../src/components/Navigation';
+import {AiFillEdit} from 'react-icons/ai';
 
 
 const Accounts = (props) => {
@@ -36,40 +38,149 @@ const Accounts = (props) => {
 
     return(
         <div>
-            <h1>Accounts</h1>
-            <h3>Net Worth - { netWorth}</h3>
+        <Navigation />
+        <div id="page-accounts">
+            <h1>Personal Financial Statement as of <br /><span>31/03/2021</span></h1>
+            
 
-            <h2>Assets</h2> 
+            <h2 className="bs-assets">Assets</h2> 
+            <h4 className="asset-header">Savings </h4>
             {
                 assetAccounts.map(e => {
+                     if(e.account_type === 'Savings')
                     return(
                         <div>
-                            <h2>{e.account_type}</h2>
+                            
                             <Link href={`edit/account/${e.id}`}>
-                            <a><h4>{e.name}</h4></a>
+                            <a><h4 className="account-name">{e.name} <AiFillEdit /></h4></a>
                             </Link>
-                            <p>${e.currentAmount.toLocaleString()}</p>
+                            <p className="account-balance">${e.currentAmount.toLocaleString()}</p>
                            
                         </div>
                     )
                 })
             }
 
-            <h2>Liablities</h2> 
-            <h3>Credit Card</h3>
+            <h4 className="asset-header" >Chequing </h4>
+             {
+                assetAccounts.map(e => {
+                     if(e.account_type === 'Chequing')
+                    return(
+                        <div>
+                            
+                            <Link href={`edit/account/${e.id}`}>
+                            <a><h4 className="account-name">{e.name}</h4></a>
+                            </Link>
+                            <p className="account-balance">${e.currentAmount.toLocaleString()}</p>
+                           
+                        </div>
+                    )
+                })
+            }
+            <h4 className="asset-header" >Wallet </h4>
+             {
+                assetAccounts.map(e => {
+                     if(e.account_type === 'Wallet')
+                    return(
+                        <div>
+                            
+                            <Link href={`edit/account/${e.id}`}>
+                            <a><h4 className="account-name">{e.name}</h4></a>
+                            </Link>
+                            <p className="account-balance">${e.currentAmount.toLocaleString()}</p>
+                           
+                        </div>
+                    )
+                })
+            }
+            <h4 className="asset-header" >Receivables </h4>
+             {
+                assetAccounts.map(e => {
+                     if(e.account_type === 'Receivables')
+                    return(
+                        <div>
+                            
+                            <Link href={`edit/account/${e.id}`}>
+                            <a><h4 className="account-name">{e.name}</h4></a>
+                            </Link>
+                            <p className="account-balance">$ {e.currentAmount.toLocaleString()}</p>
+                           
+                        </div>
+                    )
+                })
+            }
+
+
+
+
+
+
+
+
+
+            <h2 className="bs-liabilities">Liablities</h2> 
+            <p className="asset-header">Credit Card</p>
             {
                 liabilityAccounts.map(e => {
                     if(e.account_type === 'Credit Card')
                     return(
                         <div>
                             <Link href={`edit/account/${e.id}`}>
-                            <a><h4>{e.name}</h4></a>
+                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
                             </Link>
-                            <p>${e.currentAmount.toLocaleString()}</p>
+                            <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
                         </div>
                     )
                 })
             }
+
+            <p className="asset-header">Loans</p>
+            {
+                liabilityAccounts.map(e => {
+                    if(e.account_type === 'Loans')
+                    return(
+                        <div>
+                            <Link href={`edit/account/${e.id}`}>
+                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
+                            </Link>
+                            <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
+                        </div>
+                    )
+                })
+            }
+            <p className="asset-header">Mortgages</p>
+            {
+                liabilityAccounts.map(e => {
+                    if(e.account_type === 'Mortgages')
+                    return(
+                        <div>
+                            <Link href={`edit/account/${e.id}`}>
+                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
+                            </Link>
+                            <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
+                        </div>
+                    )   
+                })
+            }
+            <p className="asset-header">Payables</p>
+            {
+                liabilityAccounts.map(e => {
+                    if(e.account_type === 'Payables')
+                    return(
+                        <div>
+                            <Link href={`edit/account/${e.id}`}>
+                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
+                            </Link>
+                            <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
+                        </div>
+                    )   
+                })
+            }
+            <div className="networth">
+            <p className="networth-heading">Net Worth </p>
+            <p className="networth-amount">{ netWorth}</p>
+            </div>
+        </div>
         </div>
     )
 }

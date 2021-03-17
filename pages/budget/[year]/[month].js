@@ -6,6 +6,11 @@ import moment from 'moment';
 import EasyEdit, { Types } from "react-easy-edit";
 import {AddBudget} from '../../../src/actions/OtherActions';
 import Link from 'next/link';
+// import {AiFillEdit} from 'react-icons/ai';
+import {ImArrowRight} from 'react-icons/im';
+import {ImArrowLeft} from 'react-icons/im';
+import Navigation from '../../../src/components/Navigation';
+
 
 const Budgeting = (props) => {
     String.prototype.capitalize = function() {
@@ -33,8 +38,10 @@ const Budgeting = (props) => {
     }
    let totalExpenses = 0;
     return(
-        <div>
-            <h2>{props.params.month.capitalize()} - {props.params.year}</h2>
+        <>
+        <Navigation />
+        <div className="page-budget">
+            <h2>Personal Monthly Budget <br /> {props.params.month.capitalize()} - {props.params.year}</h2>
         
         {props.uTransactions.map(e => {
 
@@ -43,7 +50,12 @@ const Budgeting = (props) => {
             }
 
         })}
-       <p><b> Total Expenses for the Month {totalExpenses}</b></p>
+       <div className="total-expense-container">
+       <p className="total-expense-header"> Total Actual Expenses for the Month </p>
+       <p className="total-expense-amount">{totalExpenses}</p>
+       </div>
+
+       <p className="expense-categories">Expense Categories</p>
         {props.expensesCats.map((e,i) => {
             let sum = 0;
             let setBudget = 0;
@@ -62,7 +74,7 @@ const Budgeting = (props) => {
                            if(h.category){
                             if(h.category.label === e.label && moment(h.createdAt).isSame(paramDate, 'month')){
                                 
-                                sum += h.amount
+                            <p className="hello">{ sum += h.amount}</p>
                                
                                 
                             }
@@ -70,12 +82,14 @@ const Budgeting = (props) => {
                            
                         })}
                     </span>
-                    {e.label} - {sum}
-                    <br/>
-                    {(setBudget-sum == 0) ? 'ditto' :  (setBudget-sum > 0 ? 'left' : ' over')} ___ {Math.abs(setBudget-sum)} 
-                    <br/><br/>
-                    <span>Budgeted Amount</span>
-                    { <EasyEdit
+                    
+                    <div className="expense-categories-category">
+                    <p className="expense-categories-name">{e.label}</p>
+                    <p className="expense-categories-amount">{sum}</p>
+                    <p className="expense-categories-budgeted-amount-title">Budgeted Amount</p>
+                    { <p
+                        className="expense-categories-budgeted-amount"
+                        ><EasyEdit
                         type={Types.NUMBER}
                         value={setBudget ||'Set Budget'}
                         onSave={(value) => {save(value,e.label)}}   
@@ -83,22 +97,35 @@ const Budgeting = (props) => {
                         cancelButtonLabel="Cancel"
                         attributes={{ name: "awesome-input", id: 1 }}
                         instructions="Click to"
-                    />} 
+                       
+                    />  </p>} 
                     
-                    <br/>
-                    <hr/>
+
+                     <p className="expense-categories-budget-difference-title">Difference</p> 
+                    {<p
+                        className="expense-categories-budget-difference"
+                        ><span>
+                        {(setBudget-sum == 0) ? ' ' :  (setBudget-sum > 0 ? 'left ' : ' over ')}</span>
+                        {Math.abs(setBudget-sum)}</p>} 
+                    
+                    </div>
                     
                 </div>
             )
         })}
+
+        <div className="next-previous-container">
         <p><Link href={`/budget/${prevY}/${prevM}`}>
-                        <a>Previous Month Budget</a>
+                        <a><ImArrowLeft /> Previous Month Budget </a>
                     </Link></p>
         <p><Link href={`/budget/${nextY}/${nextM}`}>
-                        <a>Next Month Budget</a>
+                        <a>Next Month Budget <ImArrowRight /></a>
                     </Link></p>
+
+        </div>
             
         </div>
+        </>
     )
 }
 
