@@ -59,9 +59,10 @@ const startSignInUser = ({email, password} = {}) => {
 
 const LogoutUser = () => {
     auth.signOut().then(() => {
+        Router.push('/login');
         Cookies.remove('userId');
         localStorage.clear();
-        Router.push('/login');
+       
   
 
     })

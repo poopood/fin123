@@ -1,0 +1,9 @@
+    .edit-account-form{
+        .submit-delete{
+            background: #EC4646 !important;
+
+            &:hover{
+        background: darken($color: #EC4646, $amount: 3%) !important
+    }
+        }
+    }

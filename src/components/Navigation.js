@@ -4,7 +4,7 @@ import moment, { now } from 'moment';
 import {useSpring, animated} from 'react-spring';
 // import {LogoutUser} from '../src/actions/UserActions';
 import {LogoutUser} from '../actions/UserActions';
-import Example from '../components/SideMenu';
+import SideMenu from '../components/SideMenu';
 import { useRouter } from "next/router";
 
 
@@ -15,7 +15,7 @@ const Navigation = () => {
     const [drop, setDrop] = useState(false);
   const [add, setAdd] = useState(false);
 
-  let currentMonth = moment(new Date()).format('MMMM');
+  let currentMonth = moment(new Date()).format('MMMM').toLowerCase();
   let currentYear = moment(new Date()).format('Y');
 
   {console.log(router.pathname, 'konichiwa')}
@@ -126,7 +126,7 @@ const Navigation = () => {
 
     return(
         <div className="dash-nav">
-        <Example />
+        <SideMenu />
           <div className="nav-content">
           <Link href="/dashboard"><div className="logo"></div></Link>
             <div className="home_links">

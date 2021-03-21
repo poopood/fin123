@@ -1,5 +1,6 @@
 .add-transaction-form,
-.add-account-form{
+.add-account-form,
+.edit-account-form{
  max-width: 880px;
  margin: 3rem auto;
  background: white;
@@ -106,3 +107,20 @@
     .CalendarMonthGrid__vertical, .CalendarMonthGrid__vertical_scrollable{
         height: 600px !important;
     }
+
+
+//
+    .page-transition-enter {
+            opacity: 0;
+          }
+          .page-transition-enter-active {
+            opacity: 1;
+            transition: opacity 150ms;
+          }
+          .page-transition-exit {
+            opacity: 1;
+          }
+          .page-transition-exit-active {
+            opacity: 0;
+            transition: opacity 150ms;
+          }

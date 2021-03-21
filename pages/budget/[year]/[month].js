@@ -38,7 +38,7 @@ const Budgeting = (props) => {
     }
    let totalExpenses = 0;
     return(
-        <>
+        <div>
         <Navigation />
         <div className="page-budget">
             <h2>Personal Monthly Budget <br /> {props.params.month.capitalize()} - {props.params.year}</h2>
@@ -125,7 +125,7 @@ const Budgeting = (props) => {
         </div>
             
         </div>
-        </>
+        </div>
     )
 }
 

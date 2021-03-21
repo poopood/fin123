@@ -6,13 +6,13 @@ import {FaLandmark} from 'react-icons/fa';
 import {FaRegListAlt} from 'react-icons/fa';
 import {FaFileInvoiceDollar} from 'react-icons/fa';
 import {FaSignOutAlt} from 'react-icons/fa';
-import {FaCaretDown} from 'react-icons/fa';
+
 import {LogoutUser} from '../actions/UserActions';
 
 import moment, { now } from 'moment';
 
 
-class Example extends React.Component {
+class SideMenu extends React.Component {
   showSettings (event) {
     event.preventDefault();
    
@@ -64,4 +64,4 @@ class Example extends React.Component {
 }
 
 
-export default Example;
+export default SideMenu;

@@ -2,12 +2,13 @@ import db from '../../../src/firebase/firebase';
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import EditAccountForm from '../../../src/components/EditAccountForm';
+import Navigation from '../../../src/components/navigation';
 
 const EditableAccount = (props) => {
     
     return(
         <div>
-        <h4>Edit Account</h4>
+        <Navigation />
         <EditAccountForm account={props.account[0]} aid={props.aid}/>  
         </div>
 

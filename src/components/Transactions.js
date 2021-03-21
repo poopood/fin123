@@ -14,11 +14,15 @@ import {AiOutlineSearch} from 'react-icons/Ai';
 
 
 
+
 const KEYS_TO_FILTERS = ['name', 'labels']
 
 
 const Transactions = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [add, setAdd] = useState(5);
+    
+    
     
   
     let LofT = [];
@@ -32,6 +36,7 @@ const Transactions = (props) => {
         })
         
     })
+
 
 
     const removeTransaction = (e) => {
@@ -57,7 +62,8 @@ const Transactions = (props) => {
         
         
                    
-                        {filteredLofts && filteredLofts.map((e, i) => {
+                        {filteredLofts && filteredLofts.slice(0, 10).map((e, i) => {
+                            
                             
                             
                             return (
@@ -73,6 +79,7 @@ const Transactions = (props) => {
                                 tabindex="2" 
                                 
                                 >
+                                
                                 
                                 {/* {console.log(e ,'e')} */}
                                 {console.log(e.entry)}
@@ -112,6 +119,8 @@ const Transactions = (props) => {
                                      Edit 
                                 </Link></span>
                                 </div>
+                                
+                      
                                
                                 </div>
                                 
@@ -119,6 +128,7 @@ const Transactions = (props) => {
                         })}
                 
                 </div>
+                
         </div>
     )
 }

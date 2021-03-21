@@ -7,6 +7,7 @@ import  Router from 'next/router';
 import jwt from 'jsonwebtoken'; 
 import cookie from 'cookie';
 import db from '../src/firebase/firebase';
+import Navigation from '../src/components/Navigation';
 
 const AddCategory = (props) => {
 //   console.log(props)
@@ -116,8 +117,11 @@ const AddCategory = (props) => {
     
     return(
         <div>
+        <Navigation />
+        <div id="form-container">
             <form onSubmit={handleSubmit(formData)}>
-            <label> Category Name &nbsp;<span />
+            <label> Category Name &nbsp;<span /></label>
+            <br />
             <input 
             type="text"
             name="name"
@@ -128,9 +132,9 @@ const AddCategory = (props) => {
             </span>}
             {errors.name && errors.name.type === 'minLength' && <span>Length of name should be atleast 5 charactors
             </span>}
-            </label>  <br/><br/>
+              <br/><br/>
 
-            <p htmlFor="entry">Choose an Entry</p>
+            <label htmlFor="entry">Choose an Entry</label>
             <Controller
                 name="entry"
                 as={Select}
@@ -143,7 +147,9 @@ const AddCategory = (props) => {
                 rules={{ required: true }}
                 
             />
+            <div className="button-container">
             <button type="submit">Submit</button>
+            </div>
             </form>
             <div>
                 <h3>Available categories</h3>
@@ -151,8 +157,9 @@ const AddCategory = (props) => {
                 {watchEntry.label === "Expense" && <p>{props.expenseCategories.map((
                    
                     {label,id}) => 
-                <div>
+                <div className="available-category available-category-expense">
                 <span>{label} </span>
+                
                 <button onClick={() => {removeCat(label,id,watchEntry.label)}}>X</button>
                  <br /> </div>
                  )
@@ -162,8 +169,9 @@ const AddCategory = (props) => {
 
 
                 {watchEntry.label === "Income" && <p>{props.IncomeCategories.map(({label, id}) => 
-                <div>
+                <div className="available-category available-category-income">
                 <span >{label} </span> 
+                
                 <button onClick={() => {removeCat(label,id,watchEntry.label)}}>X</button>
                 <br /> 
                 </div>
@@ -171,7 +179,7 @@ const AddCategory = (props) => {
                
             </div>
             {message && message}
-
+            </div>
         </div>
     )
 }

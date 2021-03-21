@@ -42,9 +42,10 @@ const EditAccountForm = (props) => {
         
     }
     return (
-        <div>
+        <div className="edit-account-form">
         <form onSubmit={handleSubmit(formData)}>
-        <label> Account Name &nbsp;<span />
+         <h3>Edit Account</h3>
+        <label> Account Name &nbsp;<span /></label> 
             <input 
             defaultValue={props.account.name}
             type="text"
@@ -54,7 +55,7 @@ const EditAccountForm = (props) => {
             </span>}
             {errors.name && errors.name.type === 'minLength' && <span>Length of name should be atleast 5 charactors
             </span>}
-            </label> 
+            
             <br/><br/>
 
             <section>
@@ -76,9 +77,7 @@ const EditAccountForm = (props) => {
                 name="currency"
                 as={Select}
                 options={[
-                { value: "USD", label: "USD" },
                 { value: "CAD", label: "CAD" },
-                { value: "EUR", label: "EUR" }
                 ]}
                 defaultValue={{value:`${props.account.currency}`, label:`${props.account.currency}`}}
                 control={control}
@@ -98,11 +97,14 @@ const EditAccountForm = (props) => {
             <button 
             type="submit"
             name="submit" 
+            className="submit"
             disabled={errors.name}
             >submit</button>
             {message && message}
         </form>
-        <button>Delete</button>
+        {/* <button
+        className="submit submit-delete"
+        >Delete</button> */}
         </div>
     )
 }

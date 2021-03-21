@@ -8,6 +8,8 @@ import Navigation from '../src/components/Navigation';
 
 
 const TransactionsPage = (props) => {
+
+  let sortedTlist = props.transactions.reverse();
   
   
     return(
@@ -15,7 +17,7 @@ const TransactionsPage = (props) => {
           <Navigation />
           <div className="transaction-page-content">
               
-              <Transactions TList={props.transactions}/>
+              <Transactions TList={sortedTlist}/>
           </div>
             
         </div>

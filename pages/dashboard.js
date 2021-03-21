@@ -1,7 +1,7 @@
-// import React,{useState, useEffect, useRef} from 'react';
+import React,{useEffect} from 'react';
 // import Link from 'next/link';
 import { connect } from 'react-redux';
-// import {LogoutUser} from '../src/actions/UserActions';
+import {LogoutUser} from '../src/actions/UserActions';
 import moment, { now } from 'moment';
 import ExpensesCatChart from '../src/components/charts/ExpensesCatChart';
 import AssetLiabilityChart from '../src/components/charts/AssetLiabilityChart';
@@ -12,12 +12,15 @@ import IncomeCatChart from '../src/components/charts/IncomeCatChart';
 import NetIncomeChart from '../src/components/charts/NetIncomeChart';
 // import {useSpring, animated} from 'react-spring';
 // import {ClickOutside} from "reactjs-click-outside";
-import Example from '../src/components/SideMenu';
+// import Example from '../src/components/SideMenu';
 import ModalExample from '../src/components/ModalPop';
 // import {FaPlus} from 'react-icons/fa';
 // import FloatingButton from '../src/components/FloatingButton';
 import Navigation from '../src/components/Navigation';
-
+import {auth} from '../src/firebase/firebase';
+import  Router from 'next/router';
+import withAuth from '../src/utils/withAuth';
+import array from 'lodash';
 
 
 
@@ -28,17 +31,36 @@ const Dashboard = (props) => {
   // const [showM, setShowM] = useState(false);
   // const [drop, setDrop] = useState(false);
   // const [add, setAdd] = useState(false);
-  
 
+//  useEffect(() => {
+//   auth.onAuthStateChanged(function(user) {
+//     if (!user) {
+//       LogoutUser()
+//     } else {
+//     }
+//   })
+//    return () => {
+     
+//    }
+//  }, [])
+  
+  // console.log(props.accounts, 'accounts 234')
  
   
 
-
+  let todaysDate= moment(new Date()).format("DD/MM/YYYY");
 
   
   
-  // let currentMonth = moment(new Date()).format('MMMM');
+  let currentMonth = moment(new Date()).format('MMMM');
+  // console.log(currentMonth, 'currentmonth')
+
+  let startCmonth = moment().clone().startOf('month').format('YYYY-MM-DD hh:mm');
+  let endCmonth = moment().clone().endOf('month').format('YYYY-MM-DD hh:mm');
+
   // let currentYear = moment(new Date()).format('Y');
+
+  // console.log(currentMonth,'currentYear');
 
 //net worth calculation
   let assetAccounts = [];
@@ -82,6 +104,22 @@ liabilityAccounts.map(e => {
     'data' :[ 0, 0, netWorth],
     'backgroundColor': "#" + ((1<<24)*Math.random() | 0).toString(16)
   }];
+  // let sortedLoft = lofT.reverse();
+
+  // let sortedLoft  = _.orderBy(lofT, (e) => {
+  //   return moment(e.createdAt.format('YYYYMMDD')
+  // }, ['desc']);
+
+  // let sortedLoft = _.orderBy(lofT, (e) => {
+  //   return
+
+  //     moment(e.createdAt).format('YYYYMMDD')},['desc'])
+      //  moment(e.createdAt.format('YYYYMMDD'))},['desc'])
+
+
+ 
+  // console.log(lofT, 'unsorted');
+
 
 
   props.transactions.map(e => {
@@ -119,16 +157,50 @@ liabilityAccounts.map(e => {
 
 
  let allExpenseValues = [];
+ let allExpenseValuesCMonth= [];
+
  let allIncomeValues = [];
+ let allIncomeValuesCMonth= [];
 
 
 lofT.map(e => {
   if(e.entry === 'expense'){
+    // console.log(e, 'eee')
     allExpenseValues.push(e.amount)
   } else if( e.entry === 'income'){
     allIncomeValues.push(e.amount)
   }
 })
+
+
+lofT.map(e => {
+  if(e.entry === 'expense'){
+    // console.log(e, 'eee')
+    if(moment(e.createdAt).isBetween(startCmonth, endCmonth)){
+      allExpenseValuesCMonth.push(e.amount)
+    }
+  } else if( e.entry === 'income'){
+    if(moment(e.createdAt).isBetween(startCmonth, endCmonth)){
+      allIncomeValuesCMonth.push(e.amount)
+    }
+  }
+
+  
+})
+
+// console.log(allIncomeValuesCMonth, 'allIncomeValuesCMonth');
+
+
+let TallExpenseValuesCMonth = _.sum(allExpenseValuesCMonth);
+let TallallIncomeValuesCMonth = _.sum(allIncomeValuesCMonth);
+console.log(TallExpenseValuesCMonth, 'total')
+console.log(TallallIncomeValuesCMonth, 'total')
+
+// allExpenseValuesCMonth.map((e, i) => {
+//   TallExpenseValuesCMonth += e[i]
+// })
+
+
 
 let totalExpense = allExpenseValues.reduce((a, b) => a + b, 0);
 let totalIncome  = allIncomeValues.reduce((a, b) => a + b, 0);
@@ -137,7 +209,12 @@ let netIncome = (totalIncome -  totalExpense)
 console.log(totalExpense, totalIncome,netIncome, 'expense and income values');
 
   // console.log(allExpenseTrForTheMonth, allIncomeTrForTheMonth)
- 
+ let AssetsData = [];
+ let LiabilityData = [];
+
+
+
+
 
 
 
@@ -149,12 +226,14 @@ console.log(totalExpense, totalIncome,netIncome, 'expense and income values');
        'data' :[ e.currentAmount, 0],
        'backgroundColor': "#" + ((1<<24)*Math.random() | 0).toString(16)
      })
+     AssetsData.push(e.currentAmount);
    } else {
     accountChartData.push({
       'label': e.name ,
       'data' :[ 0, e.currentAmount],
       'backgroundColor': "#" + ((1<<24)*Math.random() | 0).toString(16)
     })
+    LiabilityData.push(e.currentAmount);
    }
   // accountChartData.push({
   //   'label': e.name,
@@ -162,7 +241,7 @@ console.log(totalExpense, totalIncome,netIncome, 'expense and income values');
   // })
   })
 
-  console.log(accountChartData, 'account data')
+
 
 const result = Object.values(eChartData.reduce((c, {name,count}) => {
   c[name] = c[name] || {name,count: 0};
@@ -178,9 +257,14 @@ const result1 = Object.values(iChartData.reduce((c, {name,count}) => {
 }, {}));
 
 
-  const passablefunc = () => {
-   
-  }
+let TotalAssetsValue = _.sum(AssetsData);
+let TotalLiabilityValue = _.sum(LiabilityData);
+
+  // const passablefunc = () => {
+  
+  // let  sortedLoft2 = lofT.reverse();
+
+  // }
 
   return (
     <div className="outer-container">
@@ -193,10 +277,10 @@ const result1 = Object.values(iChartData.reduce((c, {name,count}) => {
           <div className="data-card" title="FEB" >
           <img src="/images/expense.png" alt=""/>
           
-            <p  >Total Expenses (Feb)</p>
+            <p  >Total Expenses ({currentMonth})</p>
              
            
-            <p>$2500</p>
+            <p>${TallExpenseValuesCMonth}</p>
             
             
             
@@ -204,24 +288,24 @@ const result1 = Object.values(iChartData.reduce((c, {name,count}) => {
           </div>
           <div className="data-card" title="for the month of February" >
           <img src="/images/income.png" alt=""/>
-            <p>Total Income (Feb) </p>
+            <p>Total Income ({currentMonth}) </p>
          
            
-            <p>$3300</p>
+            <p>${TallallIncomeValuesCMonth}</p>
             
           </div>
           <div className="data-card" title="'12/21">
           <img src="/images/receiver.png" alt=""/>
-            <p>Total Assets (02/21) </p>
+            <p>Total Assets ({todaysDate}) </p>
             
-            <p>$300</p>
+            <p>${TotalAssetsValue}</p>
             
           </div>
           <div className="data-card" title="'12/21">
           <img src="/images/expense.png" alt=""/>
-            <p>Total Liabilities  (02/21) </p>
+            <p>Total Liabilities  ({todaysDate}) </p>
            
-            <p>$3500</p>
+            <p>${TotalLiabilityValue}</p>
             
           </div>
          
@@ -267,9 +351,12 @@ export const getServerSideProps = async (context) => {
   }
 
   let userExpenseCategories = [];
+  
   let userIncomeCategories = [];
   let listOfTransactions = [];
   let userAccounts = [];
+
+ 
 
   const dbreqExpense = await db.ref(`users/${decoded}/categories/expense`)
   .once('value')
@@ -290,7 +377,6 @@ export const getServerSideProps = async (context) => {
   })
 
 //////
-
 
 
 //////
@@ -314,7 +400,10 @@ export const getServerSideProps = async (context) => {
       console.log('error fetching data', e)
   })
   // .orderByChild("createdAt").startAt(moment().startOf('month').format("YYYY-DD-MM")).endAt(moment().endOf("month").format("YYYY-DD-MM"))
-  const dbreq = await db.ref(`users/${decoded}/transactions`).orderByChild("createdAt").startAt(moment().startOf('month').format("YYYY-DD-MM")).endAt(moment().endOf("month").format("YYYY-DD-MM"))
+  const dbreq = await db.ref(`users/${decoded}/transactions`)
+  .orderByChild("createdAt")
+  .startAt(moment().startOf('month').format("YYYY-DD-MM"))
+  .endAt(moment().endOf("month").format("YYYY-DD-MM"))
   .once('value')
       .then((snapshot) => snapshot.val())
       .then((val) => {
@@ -374,5 +463,6 @@ const mapStateToProps = () => {
 };
 
 
-export default connect(mapStateToProps)(Dashboard);
+// export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(withAuth(Dashboard));
 
