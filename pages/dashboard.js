@@ -275,7 +275,7 @@ let TotalLiabilityValue = _.sum(LiabilityData);
         <div className="dash_body_content">
         <div id="cool-data">
           <div className="data-card" title="FEB" >
-          <img src="/images/expense.png" alt=""/>
+          <img src="/images/expense2.png" alt=""/>
           
             <p  >Total Expenses ({currentMonth})</p>
              
@@ -287,7 +287,7 @@ let TotalLiabilityValue = _.sum(LiabilityData);
             
           </div>
           <div className="data-card" title="for the month of February" >
-          <img src="/images/income.png" alt=""/>
+          <img src="/images/income2.png" alt=""/>
             <p>Total Income ({currentMonth}) </p>
          
            
@@ -295,14 +295,14 @@ let TotalLiabilityValue = _.sum(LiabilityData);
             
           </div>
           <div className="data-card" title="'12/21">
-          <img src="/images/receiver.png" alt=""/>
+          <img src="/images/assets.png" alt=""/>
             <p>Total Assets ({todaysDate}) </p>
             
             <p>${TotalAssetsValue}</p>
             
           </div>
           <div className="data-card" title="'12/21">
-          <img src="/images/expense.png" alt=""/>
+          <img src="/images/liabilities.png" alt=""/>
             <p>Total Liabilities  ({todaysDate}) </p>
            
             <p>${TotalLiabilityValue}</p>

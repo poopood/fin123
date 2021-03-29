@@ -520,7 +520,7 @@
 }
 #add-item{
     position: absolute;
-    top: 3.2rem;
+    top: 4.25rem;
     transform: translateX(-105%);
     z-index: 900;
     background: #FFFFFF;
@@ -555,8 +555,17 @@
 #dropdown-logout ul{
 
     li{
+        position: relative;
         a{
             padding-left: 1rem;
+        }
+
+        span{
+            position:absolute;
+            font-size: .9rem;
+            top: 1px;
+            right:1px;
+            font-weight: 300;
         }
     }
 }

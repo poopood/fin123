@@ -109,7 +109,7 @@ const Navigation = () => {
             <input type="checkbox"/>
             <span class="slider round"></span>
             </label>
-            <a href="#"> Night Mode</a></li>
+            <a href="#"> Night Mode</a> <span>Beta</span></li>
             <li onClick={LogoutUser}><img src="/images/logout.svg" alt=""/><a href="#">Log Out</a></li>
             </ul>
       </div>
@@ -164,9 +164,10 @@ const Navigation = () => {
                     <img src="/images/plus.svg" alt=""
                     onClick={() => setAdd(!add)}
                     />
-                    {add && <AddItem />}
+                   
                  
                   </li>
+                   {add && <AddItem />}
                     <li 
                     class="tooltip--bottom" data-tooltip="Accounts">
                     <Link href="/accounts">
