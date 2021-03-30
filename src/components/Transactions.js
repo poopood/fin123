@@ -6,11 +6,11 @@ import moment from 'moment';
 import Link from 'next/link';
 import SearchInput, {createFilter} from 'react-search-input';
 import {FaSearch} from 'react-icons/fa';
-import {AiOutlineDelete} from 'react-icons/Ai';
-import {AiOutlineEdit} from 'react-icons/Ai';
-import {AiFillCaretDown} from 'react-icons/Ai';
-import {AiFillCaretUp} from 'react-icons/Ai';
-import {AiOutlineSearch} from 'react-icons/Ai';
+import {AiOutlineDelete} from 'react-icons/ai';
+import {AiOutlineEdit} from 'react-icons/ai';
+import {AiFillCaretDown} from 'react-icons/ai';
+import {AiFillCaretUp} from 'react-icons/ai';
+import {AiOutlineSearch} from 'react-icons/ai';
 
 
 
