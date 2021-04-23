@@ -1,5 +1,6 @@
 const { default: AddAccountForm } = require("../src/components/AddAccountForm")
 import Navigation from '../src/components/Navigation';
+import withAuth from '../src/utils/withAuth';
 
 const AddAccount = () => {
     return(
@@ -11,4 +12,4 @@ const AddAccount = () => {
 }
 
 
-export default AddAccount;
+export default withAuth(AddAccount);

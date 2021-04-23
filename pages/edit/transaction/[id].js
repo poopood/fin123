@@ -4,6 +4,9 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import EditTransactionForm from '../../../src/components/EditTransactionForm';
 import Link from 'next/link';
+// import withAuth from '../src/utils/withAuth';
+import withAuth from '../../../src/utils/withAuth'
+import Navigation from '../../../src/components/Navigation';
 
 const TransactionToEdit = (props) => {
 
@@ -78,11 +81,14 @@ props.transaction.map((e) => {
 })
 
 
+
+
  
     return(
         <div>
-        <h4>Edit Transaction</h4>
+        <Navigation />
         <EditTransactionForm transaction={props.transaction[0]} tid={props.tid} accounts={props.accounts} AddAccountsLink={AddAccountsLink} AccountsIDcat={AccountsIDcat}   expenseCats={props.expense} incomeCats={props.income} category={transaction.category} transactionLabels={transactionLabels} description={props.description} transferAccount={transferAccount}/>
+       
         </div>
 
     )
@@ -196,4 +202,4 @@ export const getServerSideProps = async ({params, req}) => {
 
 }
 
-export default TransactionToEdit;
+export default withAuth(TransactionToEdit);

@@ -24,10 +24,12 @@ import array from 'lodash';
 
 
 
+
 // import firebase from '../src/firebase/firebase'
 
 
 const Dashboard = (props) => {
+  
   // const [showM, setShowM] = useState(false);
   // const [drop, setDrop] = useState(false);
   // const [add, setAdd] = useState(false);
@@ -122,7 +124,7 @@ liabilityAccounts.map(e => {
 
 
 
-  props.transactions.map(e => {
+  props.transactions && props.transactions.map(e => {
     // console.log(moment(e.createdAt).isSame(new Date(), 'year') && );
     lofT.push(e);
   })
@@ -265,12 +267,14 @@ let TotalLiabilityValue = _.sum(LiabilityData);
   // let  sortedLoft2 = lofT.reverse();
 
   // }
+  
 
   return (
     <div className="outer-container">
     
       
         <Navigation />
+      
       
         <div className="dash_body_content">
         <div id="cool-data">
@@ -280,7 +284,7 @@ let TotalLiabilityValue = _.sum(LiabilityData);
             <p  >Total Expenses ({currentMonth})</p>
              
            
-            <p>${TallExpenseValuesCMonth}</p>
+            <p>${TallExpenseValuesCMonth.toLocaleString()}</p>
             
             
             
@@ -291,21 +295,21 @@ let TotalLiabilityValue = _.sum(LiabilityData);
             <p>Total Income ({currentMonth}) </p>
          
            
-            <p>${TallallIncomeValuesCMonth}</p>
+            <p>${TallallIncomeValuesCMonth.toLocaleString()}</p>
             
           </div>
           <div className="data-card" title="'12/21">
           <img src="/images/assets.png" alt=""/>
             <p>Total Assets ({todaysDate}) </p>
             
-            <p>${TotalAssetsValue}</p>
+            <p>${TotalAssetsValue.toLocaleString()}</p>
             
           </div>
           <div className="data-card" title="'12/21">
           <img src="/images/liabilities.png" alt=""/>
             <p>Total Liabilities  ({todaysDate}) </p>
            
-            <p>${TotalLiabilityValue}</p>
+            <p>${TotalLiabilityValue.toLocaleString()}</p>
             
           </div>
          

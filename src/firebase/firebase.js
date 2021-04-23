@@ -16,12 +16,18 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
  }
+
+ const  initFirebase = () => {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+}
  
 const db = firebase.database();
 const auth = firebase.auth();
 
 
 
-export {auth,firebase, db as default };
+export {auth,initFirebase,firebase, db as default };
 
 

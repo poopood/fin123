@@ -5,12 +5,29 @@ import {useForm, Controller } from 'react-hook-form';
 import {auth} from '../src/firebase/firebase';
 import startAddUser, {startSignInUser} from '../src/actions/UserActions';
 import db from '../src/firebase/firebase';
-
+import  {useToast}  from "@chakra-ui/toast";
 
 
 const SignUp = (props) => {
     const [error, setError] = useState('')
     const [message, setMessage] = useState('');
+
+    const toast = useToast();
+    const id = "test-toast";
+
+    const toastFunc = () => {
+        if (!toast.isActive(id)) {
+        toast({
+            id,
+            title: "Welcome",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+            position:"bottom"
+          })
+
+        }
+    }
 
     
     const {register, handleSubmit,control, errors, reset} = useForm({
@@ -46,7 +63,7 @@ const SignUp = (props) => {
                 db.ref(`users/${uid}/categories/expense`).push(defaultCategory)
                 db.ref(`users/${uid}/categories/income`).push(defaultCategory)
                 .then(() => {
-                    setMessage('thank you');
+                    toastFunc();
                     props.dispatch(startSignInUser(params))
                 })
                 
@@ -54,7 +71,18 @@ const SignUp = (props) => {
 
             })
             .catch((e) => {
-                setError(e.message);
+                // setError(e.message);
+                if (!toast.isActive(id)) {
+                    toast({
+                        id,
+                        title: `${e.message}`,
+                        status: "error",
+                        duration: 1000,
+                        isClosable: true,
+                        position:"bottom"
+                      })
+            
+                    }
                 
             })
     }

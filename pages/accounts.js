@@ -5,7 +5,7 @@ import cookie from 'cookie';
 import { connect } from 'react-redux';  
 import Navigation from '../src/components/Navigation';
 import {AiFillEdit} from 'react-icons/ai';
-
+import withAuth from '../src/utils/withAuth';
 
 const Accounts = (props) => {
         let assetAccounts = [];
@@ -52,7 +52,12 @@ const Accounts = (props) => {
                         <div>
                             
                             <Link href={`edit/account/${e.id}`}>
-                            <a><h4 className="account-name">{e.name} <AiFillEdit /></h4></a>
+                            <a><h4 className="account-name">{e.name} 
+                            <span className="fade-icon">
+                            <AiFillEdit />
+                            </span>
+                            </h4>
+                            </a>
                             </Link>
                             <p className="account-balance">${e.currentAmount.toLocaleString()}</p>
                            
@@ -69,7 +74,10 @@ const Accounts = (props) => {
                         <div>
                             
                             <Link href={`edit/account/${e.id}`}>
-                            <a><h4 className="account-name">{e.name}</h4></a>
+                            <a><h4 className="account-name">{e.name}
+                            <span className="fade-icon">
+                            <AiFillEdit /> </span>
+                            </h4></a>
                             </Link>
                             <p className="account-balance">${e.currentAmount.toLocaleString()}</p>
                            
@@ -85,7 +93,10 @@ const Accounts = (props) => {
                         <div>
                             
                             <Link href={`edit/account/${e.id}`}>
-                            <a><h4 className="account-name">{e.name}</h4></a>
+                            <a><h4 className="account-name">{e.name}
+                            <span className="fade-icon">
+                            <AiFillEdit /> </span>
+                            </h4></a>
                             </Link>
                             <p className="account-balance">${e.currentAmount.toLocaleString()}</p>
                            
@@ -101,7 +112,9 @@ const Accounts = (props) => {
                         <div>
                             
                             <Link href={`edit/account/${e.id}`}>
-                            <a><h4 className="account-name">{e.name}</h4></a>
+                            <a><h4 className="account-name">{e.name}
+                            <span className="fade-icon">
+                            <AiFillEdit /> </span></h4></a>
                             </Link>
                             <p className="account-balance">$ {e.currentAmount.toLocaleString()}</p>
                            
@@ -126,7 +139,9 @@ const Accounts = (props) => {
                     return(
                         <div>
                             <Link href={`edit/account/${e.id}`}>
-                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
+                            <a><p className="account-name">{e.name}
+                            <span className="fade-icon">
+                             <AiFillEdit /></span></p></a>
                             </Link>
                             <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
                         </div>
@@ -141,7 +156,9 @@ const Accounts = (props) => {
                     return(
                         <div>
                             <Link href={`edit/account/${e.id}`}>
-                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
+                            <a><p className="account-name">{e.name}
+                            <span className="fade-icon">
+                            <AiFillEdit /></span></p></a>
                             </Link>
                             <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
                         </div>
@@ -155,7 +172,8 @@ const Accounts = (props) => {
                     return(
                         <div>
                             <Link href={`edit/account/${e.id}`}>
-                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
+                            <a><p className="account-name">{e.name} <span className="fade-icon">
+                            <AiFillEdit /></span></p></a>
                             </Link>
                             <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
                         </div>
@@ -169,7 +187,8 @@ const Accounts = (props) => {
                     return(
                         <div>
                             <Link href={`edit/account/${e.id}`}>
-                            <a><p className="account-name">{e.name} <AiFillEdit /></p></a>
+                            <a><p className="account-name">{e.name} <span className="fade-icon">
+                            <AiFillEdit /></span></p></a>
                             </Link>
                             <p className="account-balance ab-l">${e.currentAmount.toLocaleString()}</p>
                         </div>
@@ -230,4 +249,4 @@ const mapStateToProps = () => {
 };
 
 
-export default connect(mapStateToProps)(Accounts);
+export default connect(mapStateToProps)(withAuth(Accounts));

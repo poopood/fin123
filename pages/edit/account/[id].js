@@ -5,13 +5,18 @@ import EditAccountForm from '../../../src/components/EditAccountForm';
 import Navigation from '../../../src/components/Navigation';
 // import Navigation from '../../../src/components/Navigation';
 // import Navigation from '../../../src/components/Navigation';
+// import withAuth from '../src/utils/withAuth';
+
 
 const EditableAccount = (props) => {
+    console.log(props.ccc, 'props')
+
     
     return(
         <div>
         <Navigation />
         <EditAccountForm account={props.account[0]} aid={props.aid}/>  
+        
         </div>
 
     )
@@ -41,11 +46,24 @@ export const getServerSideProps = async ({params, req}) => {
       console.log('error fetching data', e)
   })
 
+  //editable
+  let ccc = [];
+  const dbcall = await db.ref(`users/${decoded}/transactions`).orderByChild('-MPo56q9yeg9BFNtzu0a')
+  .once('value')
+  .then((snapshot) => snapshot.val())
+  .then((val) => {
+      ccc.push(val)
+  })
+    .catch((e) => [
+        console.log('error fetching data', e)
+    ])
+
 
     return {
         props : {
             account : [...accountToEdit],
-            aid: idOfAccountToEdit
+            aid: idOfAccountToEdit,
+            ccc:ccc
         }
     }
 

@@ -1,12 +1,15 @@
 .add-transaction-form,
 .add-account-form,
-.edit-account-form{
+.edit-account-form,
+.edit-transaction-form{
  max-width: 880px;
  margin: 3rem auto;
  background: white;
  padding: 1rem 5rem;
  box-shadow: 0px 1px 2px  rgba(0,0,0,0.12);
  border: 5px solid black;
+ 
+
  
 
  @include media(">phone", "<=800px"){

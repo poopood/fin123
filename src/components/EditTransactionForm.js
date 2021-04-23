@@ -10,6 +10,8 @@ import 'react-dates/initialize';
 import {SingleDatePicker} from 'react-dates';
 import NumberFormat from "react-number-format";
 import Link from 'next/link';
+import  {useToast}  from "@chakra-ui/toast";
+
 
 const AddTransactionForm = (props) => {
   
@@ -27,6 +29,23 @@ const AddTransactionForm = (props) => {
     let AccountsIDcat = props.AccountsIDcat;
 
     let transactionLabels = [];
+
+    const toast = useToast();
+    const id = "test-toast";
+
+    const toastFunc = () => {
+        if (!toast.isActive(id)) {
+        toast({
+            id,
+            title: "Transaction Edited",
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+            position:"bottom"
+          })
+
+        }
+    }
 
     String.prototype.capitalize = function() {
         return this.charAt(0).toUpperCase() + this.slice(1);
@@ -118,9 +137,9 @@ const AddTransactionForm = (props) => {
         )}
 
 
-        setMessage('thank you');
+        toastFunc();
         setTimeout(() => {
-            Router.push('/')
+            Router.push('/transactions')
         }, 1000 )
 
     }
@@ -131,9 +150,10 @@ const AddTransactionForm = (props) => {
 
 
     return(
-        <div className="transaction-app">
+        <div className="edit-transaction-form">
             <form onSubmit={handleSubmit(formData)}>
-            <label> Transaction Name &nbsp;<span />
+            <h3>Edit Transaction</h3>
+            <label> Transaction Name &nbsp; </label> 
             <input 
             type="text"
             name="name"
@@ -144,7 +164,7 @@ const AddTransactionForm = (props) => {
             </span>}
             {errors.name && errors.name.type === 'minLength' && <span>Length of name should be atleast 5 charactors
             </span>}
-            </label> 
+            
                 <br/><br/>
             
             <section>
@@ -164,7 +184,7 @@ const AddTransactionForm = (props) => {
           </section>
           <br/>
           <section>
-                <label> Description &nbsp;<span />
+                <label> Description &nbsp;</label> 
                 <br/>
                 <input 
                 name="description"
@@ -172,12 +192,12 @@ const AddTransactionForm = (props) => {
                 placeholder="Optional"
                 defaultValue={props.description}
                  />
-                </label> 
+                
                     <br/>
           </section>
             
 
-            <h3>Pick a Date</h3>
+            <label>Pick a Date</label>
             <section>
         
             <SingleDatePicker
@@ -191,6 +211,13 @@ const AddTransactionForm = (props) => {
                  onFocusChange={ c => setFocus(c.focused)} // PropTypes.func.isRequired
                  id="dates" // PropTypes.string.isRequired,
                  isOutsideRange={() => false}
+                 withPortal={true}
+             
+                 readOnly
+                verticalHeight={370}
+                orientation="vertical"
+                numberOfMonths={2}
+                
                  
                  />
              
@@ -298,15 +325,14 @@ const AddTransactionForm = (props) => {
             <button 
             type="submit"
             name="submit" 
+            className="submit" 
             disabled={errors.name}
             >submit</button>
             
             </form> 
             {message && message}
 
-            <Link href='/'>
-            <a>Go Home</a>
-            </Link>
+            
 
 		</div> 
 

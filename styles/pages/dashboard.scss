@@ -887,8 +887,10 @@
     width: 40px;
     height: 40px;
     background:white;
-    bottom: 10rem;
+    // bottom: 10rem;
+    bottom: calc(100vh - 90%);
     right: 15rem;
+    right: calc(100vw - 90%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -898,25 +900,25 @@
     transition: all .3s;
     z-index: 2;
 
-    @include media(">phone", "<=1200px"){
-        bottom: 10rem;
-        right: 10rem;
-    }
+    // @include media(">phone", "<=1200px"){
+    //     bottom: 10rem;
+    //     right: 10rem;
+    // }
 
-    @include media(">phone", "<=1023px"){
-        // margin: 0 1rem;
-        bottom: 10rem;
-        right: 10rem;
+    // @include media(">phone", "<=1023px"){
+    //     // margin: 0 1rem;
+    //     bottom: 10rem;
+    //     right: 10rem;
 
-    }
-    @include media(">phone", "<=768px"){
-        bottom: 8rem;
-        right: 5rem;
-    }
-    @include media(">phone", "<=425px"){
-        bottom: 8rem;
-        right: 3rem;
-    }
+    // }
+    // @include media(">phone", "<=768px"){
+    //     bottom: 8rem;
+    //     right: 5rem;
+    // }
+    // @include media(">phone", "<=425px"){
+    //     bottom: 8rem;
+    //     right: 3rem;
+    // }
    
 
     svg{

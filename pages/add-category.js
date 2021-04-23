@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import db from '../src/firebase/firebase';
 import Navigation from '../src/components/Navigation';
+import withAuth from '../src/utils/withAuth';
 
 const AddCategory = (props) => {
 //   console.log(props)
@@ -250,4 +251,5 @@ const mapStateToProps = () => {
 };
 
 
-export default connect(mapStateToProps)(AddCategory);
+// export default connect(mapStateToProps)(AddCategory);
+export default connect(mapStateToProps)(withAuth(AddCategory));

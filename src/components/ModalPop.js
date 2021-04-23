@@ -58,7 +58,7 @@ function ModalExample() {
         aria-labelledby="modal-label"
         id="cheerio"
       >
-        <div>
+        <div className="add-modal">
           
           <ul>
            <Link href="/add-transaction"><li><a href="#"> <img src="images/add.png" alt=""/> Add Transaction</a></li></Link>

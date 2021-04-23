@@ -11,6 +11,8 @@ import {AiOutlineEdit} from 'react-icons/ai';
 import {AiFillCaretDown} from 'react-icons/ai';
 import {AiFillCaretUp} from 'react-icons/ai';
 import {AiOutlineSearch} from 'react-icons/ai';
+import  {useToast}  from "@chakra-ui/toast";
+
 
 
 
@@ -21,6 +23,7 @@ const KEYS_TO_FILTERS = ['name', 'labels']
 const Transactions = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [add, setAdd] = useState(5);
+    const toast = useToast();
     
     
     
@@ -42,6 +45,12 @@ const Transactions = (props) => {
     const removeTransaction = (e) => {
         props.dispatch(rmFromLib(e))
         Router.push('/transactions')
+        toast({
+            title: "Deleted Transaction",
+            status: "success",
+            duration: 4000,
+            isClosable: true
+          })
     }
   
     const searchUpdated = (term) => {
@@ -56,7 +65,7 @@ const Transactions = (props) => {
                 <div>
         <div className="search-container">   
         <SearchInput id="search-input" onChange={searchUpdated} placeholder="Search Transactions by Title or Label" 
-        className="search-input" tabindex="1" />
+        className="search-input" tabIndex="1" />
         <AiOutlineSearch className="search-icon"/>
         </div> 
         
@@ -96,7 +105,7 @@ const Transactions = (props) => {
                                 <p className="transaction-date" >{e.createdAt && moment(e.createdAt).format('ll')}</p>
                                 <p className="transaction-description">{e.description} </p>
                               
-                                <p className="transaction-amount">${e.amount}</p>
+                                <p className="transaction-amount">${e.amount.toLocaleString()}</p>
                                 <p>Labels : {e.labels.map(e => {
                                     return(
                                         <span className="transaction-label">{e}&nbsp;</span>
@@ -113,11 +122,11 @@ const Transactions = (props) => {
                                     
                                 }><AiOutlineDelete />Remove</span>
                              
-                                <span 
+                                <Link href={`edit/transaction/${e.id}`}><span 
                                 className="transaction-btn btn-ed" ><AiOutlineEdit />
-                                <Link href={`edit/transaction/${e.id}`}>
+                                
                                      Edit 
-                                </Link></span>
+                                </span></Link>
                                 </div>
                                 
                       

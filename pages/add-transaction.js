@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import jwt from 'jsonwebtoken'; 
 import cookie from 'cookie';
 import db from '../src/firebase/firebase';
-
+import withAuth from '../src/utils/withAuth';
 
 const AddTransactionPage = (props) => {
  
@@ -104,5 +104,6 @@ export const getServerSideProps = async (context) => {
   };
   
   
-  export default connect(mapStateToProps)(AddTransactionPage);
+  // export default connect(mapStateToProps)(AddTransactionPage);
+  export default connect(mapStateToProps)(withAuth(AddTransactionPage));
 

@@ -11,15 +11,29 @@ import 'react-dates/initialize';
 import {SingleDatePicker} from 'react-dates';
 import NumberFormat from "react-number-format";
 import Navigation from '../components/Navigation';
-
+import  {useToast}  from "@chakra-ui/toast";
 
 import Link from "next/link";
 
 const AddTransactionForm = (props) => {
    
+   
+    const toast = useToast();
+    const id = "test-toast";
 
+    const toastFunc = () => {
+        if (!toast.isActive(id)) {
+        toast({
+            id,
+            title: "Transaction Added",
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+            position:"bottom"
+          })
 
-
+        }
+    }
     
 
     const groupStyles = {
@@ -140,7 +154,7 @@ const AddTransactionForm = (props) => {
         setMessage('thank you');
        
         setTimeout(() => {
-            Router.push('/')
+            Router.push('/transactions')
         }, 1000 )
         
     }
@@ -343,8 +357,13 @@ const AddTransactionForm = (props) => {
             </form> 
             <div>
         
-          </div>
-            {message && message}
+          
+           {message && 
+           
+                  toastFunc()
+            } 
+         
+            </div>
 
 		</div> 
         </div>

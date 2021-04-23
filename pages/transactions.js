@@ -4,19 +4,20 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 import Transactions from '../src/components/Transactions';
 import Navigation from '../src/components/Navigation';
-
+import withAuth from '../src/utils/withAuth';
 
 
 const TransactionsPage = (props) => {
 
   let sortedTlist = props.transactions.reverse();
-  
+  // console.log(props.pg, 'hello');
+  // console.log(props.transactions, 'yello');
   
     return(
         <div className="outer-container">
           <Navigation />
           <div className="transaction-page-content">
-              
+                
               <Transactions TList={sortedTlist}/>
           </div>
             
@@ -53,6 +54,29 @@ export const getServerSideProps = async(context) => {
       console.log('error fetching data', e)
   })
 
+  // let gg = [];
+  // const dbreq3 =  await db.ref(`users/${decoded}/transactions`)
+  // .once('value')
+  // .then((snapshot) => snapshot.val())
+  // .then((val) => {
+  //   Object.keys(val).map((key) => {
+  //     if(val[key].aid === "-MQvjtVQCSg6EoQkglLb"){
+  //       gg.push(val[key])
+  //     }
+  //   })
+  // })
+  // let gg = listOfTransactions.filter((e) => {
+  //   return e.aid !== "-MPo56q9yeg9BFNtzu0a"
+  // })
+  // let fiji = [];
+  // Object.keys(gg).map((key) => {
+  //   fiji.push({
+  //     id: gg[key].id,
+  //     ...gg[key]
+  //   })
+  // })
+
+
   
   return {
     props : {
@@ -60,6 +84,8 @@ export const getServerSideProps = async(context) => {
     }
   }
 }
+
+
 
 
 // export default TransactionsPage;
@@ -70,7 +96,8 @@ const mapStateToProps = () => {
   };
   
   
-  export default connect(mapStateToProps)(TransactionsPage);
+  // export default connect(mapStateToProps)(TransactionsPage);
+  export default connect(mapStateToProps)(withAuth(TransactionsPage));
 
 
 

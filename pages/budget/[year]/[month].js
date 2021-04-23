@@ -10,6 +10,8 @@ import Link from 'next/link';
 import {ImArrowRight} from 'react-icons/im';
 import {ImArrowLeft} from 'react-icons/im';
 import Navigation from '../../../src/components/Navigation';
+// import withAuth from '../src/utils/withAuth';
+import withAuth from '../../../src/utils/withAuth';
 
 
 const Budgeting = (props) => {
@@ -17,14 +19,17 @@ const Budgeting = (props) => {
         return this.charAt(0).toUpperCase() + this.slice(1);
     }
     let budgets =  props.budgets;
+    console.log(props.params, 'yello')
     
     let paramDate = `${moment().year(props.params.year).format("Y")}-${moment().month(props.params.month).format("M")}-28`;
 
-    let prevM = moment(paramDate).subtract(1, 'month').add(1, 'day').format("MMMM").toLowerCase();
+    // let prevM = moment(paramDate).subtract(1, 'month').add(1, 'day').format("MMMM").toLowerCase();
+    // console.log(prevM , 'kellow')
     
     let nextY = moment(paramDate).add(1, 'month').format("YYYY");
     let prevY = moment(paramDate).subtract(1, 'month').format("YYYY");
     let nextM = moment(paramDate).add(1, 'month').format("MMMM").toLowerCase();
+    let prevM = moment(paramDate).subtract(1, 'month').format("MMMM").toLowerCase();
     
     const save = (value,label) => {
         props.dispatch(AddBudget({
@@ -221,4 +226,4 @@ const mapStateToProps = () => {
 };
 
 
-export default connect(mapStateToProps)(Budgeting);
+export default connect(mapStateToProps)(withAuth(Budgeting));

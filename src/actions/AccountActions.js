@@ -34,6 +34,8 @@ const startAddAccount = (
         }
 }
 
+//removeAccount
+
 const removeAccount = (id) => ({
     type: 'REMOVE_ACCOUNT',
     id
@@ -50,6 +52,157 @@ const startRemoveAccount = (id) => {
         })
     }
 }
+
+const startRemovingRelatedTransactions = (id) => {
+
+    const ucook = Cookies.get('userId');
+ 
+    const decoded = jwt.decode(ucook, { header: true })
+
+    const dbcall = db.ref(`users/${decoded}/transactions`).orderByChild(id)
+    .remove()
+    .catch((e) => {
+        console.log('error fetching data', e)
+    })
+
+}
+
+
+//bad func
+
+// const startRemovingTransactions = (id) => {
+//     const ucook = Cookies.get('userId');
+ 
+//     const decoded = jwt.decode(ucook, { header: true })
+
+//     const getAlltransactions = [];
+
+//     const dbreq =  db.ref(`users/${decoded}/transactions`)
+//         .once('value')
+//             .then((snapshot) => snapshot.val())
+//             .then((val) => {
+//               Object.keys(val).map((key) => {
+//                 getAlltransactions.push({
+//                   id: key,
+//                   ...val[key]
+//                 })
+//               }
+              
+//               );
+      
+//         })
+//         .then(() =>{
+//             let filteredTransactions = getAlltransactions.filter((e) => {
+//                 return e.aid !== id
+//             })
+//             const dbreq1 = db.ref(`users/${decoded}/transactions`).update(filteredTransactions)
+//         })
+//             .catch((e) => {
+//             console.log('error fetching data', e)
+//         })
+
+// }
+
+// const startRemoveAccount = (id) => {
+//     const ucook = Cookies.get('userId');
+ 
+//     const decoded = jwt.decode(ucook, { header: true })
+//     return (dispatch) => {
+
+//         db.ref(`users/${decoded}/accounts`).child(id).remove().then(() => {
+//             dispatch(removeAccount(id));
+
+//             //getalltransactions to an array
+//         let getAlltransactions = [];
+//         const dbreq =  db.ref(`users/${decoded}/transactions`)
+//         .once('value')
+//             .then((snapshot) => snapshot.val())
+//             .then((val) => {
+//               Object.keys(val).map((key) => {
+//                 getAlltransactions.push({
+//                   id: key,
+//                   ...val[key]
+//                 })
+//               }
+              
+//               );
+      
+//         })
+//             .catch((e) => {
+//             console.log('error fetching data', e)
+//         })
+
+//         //filter the transactions
+            
+//             let filteredTransactions = getAlltransactions.filter((e) => {
+//                 return e.aid !== id
+//             })
+
+//         //update transactions
+//             const dbreq1 = db.ref(`users/${decoded}/transactions`).update(filteredTransactions)
+
+
+
+//         })
+        
+
+
+//     }
+
+// }
+
+// startremove account part deux
+
+// const startRemoveAccount = (id) => {
+//     const ucook = Cookies.get('userId');
+//     const decoded = jwt.decode(ucook, { header: true })
+
+//     return(dispatch) => {
+
+
+//           //getalltransactions to an array
+//         let getAlltransactions = []; 
+//         const dbreq =  db.ref(`users/${decoded}/transactions`)
+//         .once('value')
+//             .then((snapshot) => snapshot.val())
+//             .then((val) => {
+//               Object.keys(val).map((key) => {
+//                 getAlltransactions.push({
+//                   id: key,
+//                   ...val[key]
+//                 })
+//               }
+              
+//               );
+      
+//         })
+//             .catch((e) => {
+//             console.log('error fetching data', e)
+//         })
+//         //filter the transactions
+//         let filteredTransactions = getAlltransactions.filter((e) => {
+//             return e.aid !== id
+//         })
+
+//         //update transactions
+//         const dbreq1 = db.ref(`users/${decoded}/transactions`).update(filteredTransactions)
+//         .then(() => {
+//             const dbreq3 = db.ref(`users/${decoded}/accounts`).child(id)
+//             .remove()
+//             .then(() => {
+//                 dispatch(removeAccount(id));
+//             })
+//         })
+
+        
+
+//     }
+
+
+
+// }
+
+
 
 ///Edit Account
 
@@ -86,4 +239,4 @@ const startEditAccount = (
 
 
 
-export { startAddAccount , startRemoveAccount, startEditAccount };
+export { startAddAccount , startRemoveAccount, startEditAccount,startRemovingRelatedTransactions };

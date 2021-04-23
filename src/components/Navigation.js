@@ -104,12 +104,7 @@ const Navigation = () => {
       <animated.div style={props} >
       <div id="dropdown-logout" ref={dropdownRef} >
           <ul >
-            <li>  
-            <label class="switch">
-            <input type="checkbox"/>
-            <span class="slider round"></span>
-            </label>
-            <a href="#"> Night Mode</a> <span>Beta</span></li>
+            
             <li onClick={LogoutUser}><img src="/images/logout.svg" alt=""/><a href="#">Log Out</a></li>
             </ul>
       </div>

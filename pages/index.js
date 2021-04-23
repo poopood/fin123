@@ -50,11 +50,12 @@ const Index = () => {
             <div className="landingPage_content">
                 <div className="sales_pitch">
                     <div className="oneline_pitch">
-                        <p>What Does Becoming Financially Independent Mean?</p>
+                        <p>What's holding you back from becoming financially independent ? </p>
                     </div>
                     <div className="sentence_pitch">
                     <p>
-                   In general, reaching financial independence means you have enough income to pay for your living expenses for the rest of your life without having to work.
+                    Are you one of most people who let their poor finances dictate their life?
+                    Join Finnikky and gain absolute control of your expenses and become the protagonist of your own story.
                     </p>
                     </div>
                     <div className="join_now_btn">

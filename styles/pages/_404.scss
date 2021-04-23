@@ -1,0 +1,36 @@
+.pge404{
+    display:grid;
+     justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content:center;
+  margin-top: -10rem;
+  height: calc(100vh - 60px);
+  padding: 5rem;
+
+  p{
+      &:first-child{
+          font-size: 2rem;
+          font-weight: 600;
+      }
+
+      &:nth-child(2){
+          margin-top: -5px;
+          font-size: 1.3rem;
+          font-weight: 100;
+      }
+  }
+
+    button{
+        margin-top: 1rem;
+        width: 15rem;
+        padding: .7rem 1.2rem;
+        background:black;
+        border: none;
+        a{
+            color: white !important;
+            font-size: 1.15rem;
+            font-weight: 100 !important;
+        }
+    }
+}

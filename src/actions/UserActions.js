@@ -1,8 +1,11 @@
+
 import db from '../firebase/firebase';
 import {auth} from '../firebase/firebase';
 import  Router from 'next/router';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
+
+
 
 
 const AddUser = (user) => ({
@@ -33,6 +36,8 @@ const SignInUser = (uid) => ({
 })
 
 const startSignInUser = ({email, password} = {}) => {
+    // const [error, setError] = useState('');
+    // const toast = useToast();
     return (dispatch) => {
         auth.signInWithEmailAndPassword(email, password)
             .then((cred) => {
@@ -48,9 +53,12 @@ const startSignInUser = ({email, password} = {}) => {
                 Router.push('/dashboard')
             }, 1000 )
             
+            
             })
             .catch((e) => {
-                console.log(e.message);
+                
+                alert(e.message);
+                
                 
             })
         

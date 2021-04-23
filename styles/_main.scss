@@ -8,7 +8,7 @@ body {
   margin: auto;
   // max-width: 1440px;
   font-size: 16px;
-  background: #F8FAFC;
+  background: #F8FAFC !important;
 
 }
 
@@ -45,4 +45,25 @@ a, a:hover, a:active, a:visited, a:focus {
         text-align: 'center';
        
 }
+
+
+///
+
+.loader{
+ display:grid;
+ background:#F8FAFC;
+ margin-top:20%;
+ align-content: center;
+ justify-content: center;
+ 
+  p{
+    font-weight: 100;
+    font-size: 3rem;
+    margin-left: -30%;
+  }
+}
+
+/*
+  Set the color of the icon
+*/
 

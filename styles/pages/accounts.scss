@@ -67,8 +67,22 @@ h2.bs-liabilities{
     // @include media(">phone", "<=1200px"){
     //     width: 80%;
     // }
+  
     
-    
+    .fade-icon{
+        padding-left: 10px;
+        opacity: 0;
+        transition: all .1s;
+
+        
+    }
+
+    &:hover{
+        .fade-icon{
+            
+            opacity: 1;
+        }
+    }
 }
 
 a{
@@ -141,3 +155,4 @@ p.account-balance.ab-l{
         background: linear-gradient(to right, #ffffff 0%,#ffffff 60%,#f0f8ff 60%,#f0f8ff 100%);
     }
 }
+

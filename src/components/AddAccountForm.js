@@ -6,7 +6,7 @@ import {groupedOptions} from '../utils/data';
 import {startAddAccount} from '../actions/AccountActions';
 import  Router from 'next/router';
 import NumberFormat from "react-number-format";
-
+import  {useToast}  from "@chakra-ui/toast";
 
 
 const AddAccountForm = (props) => {
@@ -20,6 +20,22 @@ const AddAccountForm = (props) => {
         shouldUnregister: true,
     });
 
+    const toast = useToast();
+    const id = "test-toast";
+    const toastFunc = () => {
+        if (!toast.isActive(id)) {
+        toast({
+            id,
+            title: "Account Added",
+            status: "success",
+            duration: 1000,
+            isClosable: true,
+            position:"bottom"
+          })
+
+        }
+    }
+
     const formData = ({name,currency,currentAmount,account_type}) => {
         
      
@@ -30,7 +46,7 @@ const AddAccountForm = (props) => {
             account_cat: account_type.value[0].cat,
             currency: currency.value
         }))
-        setMessage('thank you');
+        toastFunc();
         setTimeout(() => {
             Router.push('/accounts')
         }, 350 )
