@@ -62,7 +62,7 @@ function ModalExample() {
           
           <ul>
            <Link href="/add-transaction"><li><a href="#"> <img src="images/add.png" alt=""/> Add Transaction</a></li></Link>
-           <Link href="/add-transaction"><li> <img src="images/add-account.png" alt=""/><a href="#">Add Account</a></li></Link>
+           <Link href="/add-account"><li> <img src="images/add-account.png" alt=""/><a href="#">Add Account</a></li></Link>
          </ul>
          
         </div>

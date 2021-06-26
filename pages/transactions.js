@@ -94,7 +94,7 @@ const mapStateToProps = () => {
        
     };
   };
-  
+
   
   // export default connect(mapStateToProps)(TransactionsPage);
   export default connect(mapStateToProps)(withAuth(TransactionsPage));
@@ -208,3 +208,5 @@ const mapStateToProps = () => {
 
 
 // export default Index;
+
+
